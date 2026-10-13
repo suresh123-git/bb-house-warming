@@ -1,0 +1,38 @@
+@import "./styles/theme.css";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F8F0DE;
+  color: #33221A;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbar for desktop */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F0DE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D6A84F;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B77B27;
+}
