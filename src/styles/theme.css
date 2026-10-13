@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --color-maroon-dark: #4a1019;
-  --color-maroon: #751D2A;
-  --color-maroon-light: #8e2535;
-  --color-gold: #D6A84F;
-  --color-gold-light: #eed18f;
-  --color-gold-dark: #9E7422;
-  --color-ivory: #F8F0DE;
-  --color-ivory-light: #FFFDF9;
-  --color-ivory-dark: #EFE4CB;
-  --color-turmeric: #B77B27;
-  --color-mango-green: #386347;
-  --color-mango-dark: #23442e;
+  --color-terracotta: #9C4129;
+  --color-terracotta-dark: #782A15;
+  --color-teak: #542813;
+  --color-teak-dark: #381A0B;
+  --color-turmeric: #D49B28;
+  --color-brass: #DFB76C;
+  --color-brass-dark: #A97A24;
+  --color-mango: #2C5E3B;
+  --color-mango-dark: #1C3D26;
+  --color-ivory: #FAF6EE;
+  --color-sand: #EFE3D0;
 
   --font-telugu-serif: 'Noto Serif Telugu', Georgia, serif;
   --font-telugu-sans: 'Noto Sans Telugu', system-ui, sans-serif;
@@ -20,7 +19,6 @@
   --font-en-sans: 'Inter', system-ui, sans-serif;
 }
 
-/* Typography Helpers */
 .font-telugu {
   font-family: var(--font-telugu-serif);
 }
@@ -37,103 +35,94 @@
   font-family: var(--font-en-sans);
 }
 
-/* Background parchment texture & subtle kolam motif */
-.bg-parchment {
-  background-color: var(--color-ivory);
+/* Warm textured linen & threshold pattern */
+.bg-house-warm {
+  background-color: #FAF6EE;
   background-image: 
-    radial-gradient(#D6A84F 0.5px, transparent 0.5px),
-    radial-gradient(#751D2A 0.4px, #F8F0DE 0.4px);
-  background-size: 24px 24px;
-  background-position: 0 0, 12px 12px;
-  background-color: #F8F0DE;
+    radial-gradient(#D49B28 0.75px, transparent 0.75px),
+    radial-gradient(#9C4129 0.5px, #FAF6EE 0.5px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
 }
 
-.bg-parchment-clean {
-  background-color: #F8F0DE;
-  background-image: radial-gradient(rgba(214, 168, 79, 0.15) 1px, transparent 1px);
-  background-size: 20px 20px;
+/* Bell ring animation */
+@keyframes bellRing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-12deg);
+  }
+  60% {
+    transform: rotate(8deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
 }
 
-/* Subtle Temple Arch Outline */
-.temple-arch {
-  border-top-left-radius: 9999px;
-  border-top-right-radius: 9999px;
+.animate-bell-ring {
+  transform-origin: top center;
+  animation: bellRing 0.8s ease-in-out;
 }
 
-/* Gold Gradient Borders */
-.gold-border-gradient {
-  border: 1px solid transparent;
-  background: linear-gradient(#FFFDF9, #FFFDF9) padding-box,
-              linear-gradient(135deg, #D6A84F, #B77B27, #D6A84F) border-box;
+/* Door swing open 3D transitions */
+.door-perspective {
+  perspective: 1200px;
 }
 
-.gold-glow {
-  box-shadow: 0 4px 20px -2px rgba(214, 168, 79, 0.25), 0 2px 6px -1px rgba(117, 29, 42, 0.08);
+.door-left {
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.gold-glow-hover:hover {
-  box-shadow: 0 8px 30px -4px rgba(214, 168, 79, 0.4), 0 4px 12px -2px rgba(117, 29, 42, 0.15);
+.door-right {
+  transform-origin: right center;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Elegant ornamental divider */
-.ornament-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
+.door-open-left {
+  transform: rotateY(-85deg);
 }
 
-.ornament-line::before,
-.ornament-line::after {
-  content: '';
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(to right, transparent, #D6A84F, transparent);
+.door-open-right {
+  transform: rotateY(85deg);
 }
 
-/* Keyframes */
-@keyframes flameFlicker {
+/* Subtle glowing threshold */
+.threshold-glow {
+  box-shadow: 0 0 25px rgba(212, 155, 40, 0.4), 0 4px 12px rgba(156, 65, 41, 0.15);
+}
+
+/* Diya Flame Flicker */
+@keyframes diyaFlame {
   0%, 100% {
     transform: scale(1) rotate(0deg);
-    opacity: 0.95;
-    filter: drop-shadow(0 0 6px rgba(214, 168, 79, 0.8));
+    filter: drop-shadow(0 0 6px rgba(223, 183, 108, 0.85));
   }
   25% {
-    transform: scale(1.05) rotate(1deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(183, 123, 39, 0.9));
+    transform: scale(1.06) rotate(1.2deg);
+    filter: drop-shadow(0 0 9px rgba(212, 155, 40, 0.95));
   }
   50% {
-    transform: scale(0.96) rotate(-1deg);
-    opacity: 0.9;
-    filter: drop-shadow(0 0 5px rgba(214, 168, 79, 0.7));
+    transform: scale(0.95) rotate(-1deg);
+    filter: drop-shadow(0 0 5px rgba(223, 183, 108, 0.7));
   }
   75% {
-    transform: scale(1.03) rotate(0.5deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 7px rgba(214, 168, 79, 0.85));
+    transform: scale(1.04) rotate(0.6deg);
+    filter: drop-shadow(0 0 8px rgba(223, 183, 108, 0.9));
   }
 }
 
-.animate-flame {
-  animation: flameFlicker 3s infinite ease-in-out;
+.animate-diya {
+  animation: diyaFlame 2.8s infinite ease-in-out;
 }
 
-@keyframes gentleFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.animate-float {
-  animation: gentleFloat 4s infinite ease-in-out;
-}
-
-/* Toranam Leaf swaying animation */
-@keyframes leafSway {
+/* Mango Toranam Sway */
+@keyframes toranamSway {
   0%, 100% {
     transform: rotate(0deg);
   }
@@ -142,12 +131,11 @@
   }
 }
 
-.animate-leaf-sway {
+.animate-toranam-sway {
   transform-origin: top center;
-  animation: leafSway 4s ease-in-out infinite alternate;
+  animation: toranamSway 4s ease-in-out infinite alternate;
 }
 
-/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

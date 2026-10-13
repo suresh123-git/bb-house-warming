@@ -1,5 +1,5 @@
-import React from 'react';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { Bell, Sparkles, Home, ArrowRight } from 'lucide-react';
 import { BrassDiya, ToranamBanner } from './Decorations';
 import type { Language } from '../data/invitation';
 import { uiContent, invitationData } from '../data/invitation';
@@ -16,95 +16,130 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
   isOpen,
 }) => {
   const content = uiContent[currentLang];
-  const couple = invitationData.couple;
+  const { couple, eventDate } = invitationData;
+  const [isOpening, setIsOpening] = useState(false);
+  const [bellRinging, setBellRinging] = useState(false);
+
+  const handleRingAndEnter = () => {
+    setBellRinging(true);
+    setIsOpening(true);
+
+    // Audio chime bell synthesis using Web Audio API (instant, no external file needed)
+    try {
+      const audioCtx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch bell A5
+      osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 1.2);
+      gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.4);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1.4);
+    } catch {
+      // Audio fallback
+    }
+
+    setTimeout(() => {
+      onOpen();
+    }, 700);
+  };
 
   if (isOpen) {
-    // Hidden once opened, or collapsed into an accessible top banner
     return null;
   }
 
   return (
     <div
-      role="region"
-      aria-label="Auspicious Invitation Envelope"
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-[#F8F0DE] bg-parchment-clean overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Simhadwaram Auspicious Doorway"
+      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#2B140B]/90 backdrop-blur-md overflow-y-auto transition-opacity duration-700 ${
+        isOpening ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
     >
       {/* Top Toranam */}
-      <div className="fixed top-0 left-0 right-0 z-10">
+      <div className="fixed top-0 left-0 right-0 z-20">
         <ToranamBanner />
       </div>
 
-      {/* Main Auspicious Card Envelope */}
-      <div className="relative w-full max-w-lg my-auto rounded-3xl p-6 sm:p-10 text-center bg-[#FFFDF9] border-2 border-[#D6A84F] shadow-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.01]">
-        {/* Subtle decorative background kolam watermark */}
-        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full border border-[#D6A84F]/20 pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full border border-[#D6A84F]/20 pointer-events-none" />
-
-        {/* Diyas on corners */}
-        <div className="flex justify-between items-center mb-2 px-2">
-          <BrassDiya size={32} />
-          <div className="text-center">
-            <span className="text-[#D6A84F] text-sm tracking-widest uppercase font-semibold">
-              ॥ శుభకార్యం ॥
-            </span>
-          </div>
-          <BrassDiya size={32} />
-        </div>
-
-        {/* Ganesha Artwork */}
-        <div className="mx-auto my-3 w-36 h-36 sm:w-44 sm:h-44 rounded-2xl p-1 bg-gradient-to-br from-[#D6A84F] via-[#B77B27] to-[#751D2A] shadow-md">
-          <img
-            src="/assets/images/lord_ganesha.jpg"
-            alt="Lord Sri Ganesha traditional illustration"
-            className="w-full h-full object-cover rounded-xl"
-            loading="eager"
-          />
-        </div>
-
-        {/* Auspicious Invocations */}
-        <div className="space-y-1 mb-4">
-          <h2 className="text-[#751D2A] text-xl sm:text-2xl font-bold tracking-wide font-telugu">
+      {/* Main Door Presentation Card */}
+      <div className="relative w-full max-w-xl my-auto rounded-3xl bg-[#FAF6EE] border-3 border-[#DFB76C] shadow-2xl overflow-hidden">
+        {/* Sacred Header Bar */}
+        <div className="bg-gradient-to-r from-[#782A15] via-[#9C4129] to-[#782A15] text-[#FAF6EE] px-4 py-3 text-center border-b border-[#DFB76C]">
+          <p className="text-xs sm:text-sm font-semibold tracking-wider font-telugu">
             {content.omGanesh}
-          </h2>
-          <p className="text-[#B77B27] text-xs sm:text-sm font-medium tracking-widest font-telugu">
+          </p>
+          <p className="text-[11px] text-[#DFB76C] italic font-telugu mt-0.5">
             {content.subInvocation}
           </p>
         </div>
 
-        {/* Card Title */}
-        <div className="my-4 py-2 border-y border-[#D6A84F]/40">
-          <p className="text-xs uppercase tracking-widest text-[#B77B27] font-semibold">
-            {currentLang === 'te' ? 'గృహప్రవేశ ఆహ్వానం' : 'Housewarming Invitation'}
-          </p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#751D2A] mt-1 font-serif-en">
-            {couple.groom.firstName} &amp; {couple.bride.firstName}
-          </h1>
-          <p className="text-sm text-[#751D2A]/80 font-telugu mt-0.5">
-            {couple.groom.fullName[currentLang]} &amp; {couple.bride.fullName[currentLang]}
-          </p>
-          <div className="mt-2 text-xs font-semibold text-[#386347] bg-[#386347]/10 py-1 px-3 rounded-full inline-block">
-            📅 {invitationData.eventDate.fullDate[currentLang]} ({invitationData.eventDate.dayOfWeek[currentLang]})
+        {/* Simhadwaram Image Showcase */}
+        <div className="relative h-64 sm:h-80 overflow-hidden bg-[#381A0B]">
+          <img
+            src="/assets/images/simhadwaram.jpg"
+            alt="Traditional South Indian carved teak Simhadwaram entrance door decorated with mango leaves, marigolds, bells and oil lamps"
+            className="w-full h-full object-cover object-center filter brightness-95 contrast-105"
+            loading="eager"
+          />
+
+          {/* Golden Ambient Overlay with Auspicious Threshold Badge */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2B140B] via-[#2B140B]/30 to-transparent flex flex-col justify-end p-5 sm:p-6">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D49B28] text-[#381A0B] text-xs font-bold w-fit mb-2 shadow-md">
+              <Home className="w-3.5 h-3.5" />
+              <span>{content.doorScreen.tag}</span>
+            </div>
+
+            <h1 className="text-2xl sm:text-3xl font-bold text-white font-telugu drop-shadow-md">
+              {content.doorScreen.mainHeading}
+            </h1>
+            <p className="text-sm sm:text-base text-[#DFB76C] font-telugu font-medium drop-shadow-xs">
+              {content.doorScreen.subHeading}
+            </p>
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="mt-6 flex flex-col items-center gap-3">
-          <button
-            type="button"
-            onClick={onOpen}
-            autoFocus
-            className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#751D2A] via-[#8e2535] to-[#751D2A] text-[#F8F0DE] font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl hover:from-[#4a1019] hover:to-[#8e2535] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border border-[#D6A84F]"
-          >
-            <Sparkles className="w-5 h-5 text-[#D6A84F] animate-pulse" />
-            <span className={currentLang === 'te' ? 'font-telugu' : 'font-sans-en'}>
-              {content.openInvitationBtn}
-            </span>
-            <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
-          </button>
+        {/* Card Body & Interactive Door Opening */}
+        <div className="p-6 sm:p-8 text-center bg-[#FAF6EE]">
+          {/* Confirmed Date */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#9C4129]/10 text-[#782A15] border border-[#9C4129]/30 text-xs sm:text-sm font-bold font-telugu mb-4">
+            <span>📅 {eventDate.fullDate[currentLang]} ({eventDate.dayOfWeek[currentLang]})</span>
+          </div>
 
-          <p className="text-xs text-[#751D2A]/70 italic font-telugu">
-            {content.tapToEnter}
+          <p className="text-xs sm:text-sm text-[#542813] max-w-md mx-auto leading-relaxed mb-6 font-telugu">
+            {content.doorScreen.instruction}
           </p>
+
+          {/* Diya icons flanking the button */}
+          <div className="flex items-center justify-center gap-4 sm:gap-6">
+            <BrassDiya size={32} />
+
+            <button
+              type="button"
+              onClick={handleRingAndEnter}
+              autoFocus
+              className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#9C4129] via-[#782A15] to-[#9C4129] text-[#FAF6EE] font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#DFB76C] cursor-pointer"
+            >
+              <Bell
+                className={`w-5 h-5 text-[#DFB76C] ${
+                  bellRinging ? 'animate-bell-ring' : 'group-hover:rotate-12'
+                } transition-transform`}
+              />
+              <span className="font-telugu">{content.doorScreen.enterBtn}</span>
+              <ArrowRight className="w-4 h-4 text-[#DFB76C] group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <BrassDiya size={32} />
+          </div>
+
+          {/* Homeowners credit */}
+          <div className="mt-6 pt-4 border-t border-[#DFB76C]/40 text-xs text-[#542813]/70 font-telugu flex items-center justify-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#D49B28]" />
+            <span>{couple.homeownersHeadline[currentLang]}</span>
+          </div>
         </div>
       </div>
     </div>
