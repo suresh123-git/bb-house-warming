@@ -58,7 +58,7 @@ export const OurStorySection: React.FC<OurStorySectionProps> = ({ currentLang })
           <div className="lg:col-span-6 flex items-center justify-center">
             <div className="relative w-full max-w-[460px] overflow-hidden rounded-2xl shadow-[0_12px_36px_rgba(72,43,25,0.1)] border border-[#E8DFD0]">
               <img
-                src="/assets/reference_crops/our_story_perfect_hd.jpg"
+                src="/assets/images/4k/living_room_4k.jpg"
                 alt="Living room interior"
                 className="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-700"
               />

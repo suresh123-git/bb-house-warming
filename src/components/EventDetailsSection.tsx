@@ -66,7 +66,7 @@ export const EventDetailsSection: React.FC<EventDetailsSectionProps> = ({ curren
         {/* Wide feature photo: Pooja urlis, marigolds, kalash matching Panel 5 */}
         <div className="w-full max-w-lg overflow-hidden rounded-2xl shadow-[0_12px_36px_rgba(72,43,25,0.1)] border border-[#E8DFD0]">
           <img
-            src="/assets/reference_crops/event_pooja_perfect_hd.jpg"
+            src="/assets/images/4k/pooja_items_4k.jpg"
             alt="Traditional Pooja Urli, Marigolds, and Kalash"
             className="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-700"
           />

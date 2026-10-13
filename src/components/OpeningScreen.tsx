@@ -101,26 +101,24 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
         transition: 'opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      {/* Aspect-ratio constrained Stage matching Panel 1 composition (990x855 = 1.15 aspect ratio) */}
-      <div className="relative w-full h-full max-w-[1200px] max-h-[100vh] flex items-center justify-center">
-        {/* Container for door frame and inner layers */}
+      {/* 4K Aspect-ratio constrained Stage matching Panel 1 composition (1200x896 = 4:3) */}
+      <div className="relative w-full h-full max-w-[1350px] max-h-[100vh] flex items-center justify-center shadow-2xl">
         <div
           className="relative w-full h-full flex items-center justify-center"
           style={{
-            // Keep proportional scaling while filling viewport
-            aspectRatio: '990 / 855',
+            aspectRatio: '1200 / 896',
             maxHeight: '100vh',
-            maxWidth: 'calc(100vh * (990 / 855))',
+            maxWidth: 'calc(100vh * (1200 / 896))',
           }}
         >
           {/* ================= LAYER 0: DARK DOORWAY THRESHOLD CAVITY ================= */}
           <div
             className="absolute z-0 bg-[#2A1408]"
             style={{
-              left: '19.5%',
-              top: '7.0%',
-              width: '61.0%',
-              height: '79.0%',
+              left: '24.5%',
+              top: '12.8%',
+              width: '51.0%',
+              height: '70.3%',
             }}
           />
 
@@ -128,15 +126,15 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
           <div
             className="absolute z-1 overflow-hidden"
             style={{
-              left: '19.5%',
-              top: '7.0%',
-              width: '61.0%',
-              height: '79.0%',
+              left: '24.5%',
+              top: '12.8%',
+              width: '51.0%',
+              height: '70.3%',
             }}
           >
-            {/* The sunlit courtyard photograph revealed upon opening */}
+            {/* The 4K sunlit courtyard photograph revealed upon opening */}
             <img
-              src="/assets/reference_crops/courtyard_revealed_clean_hd.jpg"
+              src="/assets/images/4k/courtyard_door_fit_4k.jpg"
               alt="Sunlit courtyard"
               className={`w-full h-full object-cover transition-transform duration-1000 ${
                 doorsSwung ? 'scale-105' : 'scale-100'
@@ -151,19 +149,19 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
             />
           </div>
 
-          {/* ================= LAYER 2: 3D MOVABLE DOOR PANELS ================= */}
+          {/* ================= LAYER 2: 3D MOVABLE 4K DOOR PANELS ================= */}
           <div
             className="absolute z-10 flex"
             style={{
-              left: '19.5%',
-              top: '7.0%',
-              width: '61.0%',
-              height: '79.0%',
+              left: '24.5%',
+              top: '12.8%',
+              width: '51.0%',
+              height: '70.3%',
               perspective: '1400px',
               perspectiveOrigin: '50% 50%',
             }}
           >
-            {/* LEFT DOOR PANEL */}
+            {/* LEFT 4K DOOR PANEL */}
             <div
               className="w-1/2 h-full relative"
               style={{
@@ -177,18 +175,17 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               }}
             >
               <img
-                src="/assets/reference_crops/door_leaf_left_hd.jpg"
+                src="/assets/images/4k/door_leaf_left_4k.jpg"
                 alt="Left Door"
                 className="w-full h-full object-fill pointer-events-none"
               />
-              {/* Dynamic 3D lighting shadow overlay as door swings inward */}
               <div
                 className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none transition-opacity duration-1000"
                 style={{ opacity: doorsSwung ? 0.6 : 0 }}
               />
             </div>
 
-            {/* RIGHT DOOR PANEL */}
+            {/* RIGHT 4K DOOR PANEL */}
             <div
               className="w-1/2 h-full relative"
               style={{
@@ -202,11 +199,10 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               }}
             >
               <img
-                src="/assets/reference_crops/door_leaf_right_hd.jpg"
+                src="/assets/images/4k/door_leaf_right_4k.jpg"
                 alt="Right Door"
                 className="w-full h-full object-fill pointer-events-none"
               />
-              {/* Dynamic 3D lighting shadow overlay as door swings inward */}
               <div
                 className="absolute inset-0 bg-gradient-to-l from-black/40 to-transparent pointer-events-none transition-opacity duration-1000"
                 style={{ opacity: doorsSwung ? 0.6 : 0 }}
@@ -214,10 +210,10 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
             </div>
           </div>
 
-          {/* ================= LAYER 3: FRAME & SURROUND (LANTERNS, PLANTS, RANGOLI, URLIS) ================= */}
+          {/* ================= LAYER 3: 4K FRAME & SURROUND (LANTERNS, PLANTS, RANGOLI, URLIS) ================= */}
           <div className="absolute inset-0 z-20 pointer-events-none">
             <img
-              src="/assets/reference_crops/door_frame_clean_hd.png"
+              src="/assets/images/4k/entrance_frame_4k.png"
               alt="Entrance Frame"
               className="w-full h-full object-fill"
             />
@@ -229,10 +225,10 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               isAnimating ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
             }`}
             style={{
-              left: '20.2%',
-              top: '18%',
-              width: '59.6%',
-              height: '55%',
+              left: '24.5%',
+              top: '20%',
+              width: '51.0%',
+              height: '52%',
             }}
           >
             {/* English Heading matching Panel 1 */}
@@ -256,6 +252,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
 
             {/* Prominent Ivory Pill Button: OPEN THE DOOR → */}
             <button
+              id="open-the-door-btn"
               onClick={handleOpenClick}
               disabled={isAnimating || doorsSwung}
               className="group cursor-pointer bg-[#F6F1E8] hover:bg-white text-[#482B19] active:scale-95 font-sans font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/50"
