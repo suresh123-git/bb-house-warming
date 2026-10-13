@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Menu, X, Home } from 'lucide-react';
-import { LanguageToggle } from './LanguageToggle';
+import { Volume2, VolumeX, RotateCcw } from 'lucide-react';
 import type { Language } from '../data/invitation';
-import { uiContent, invitationData } from '../data/invitation';
+import { storyboardContent } from '../data/invitation';
 
 interface NavbarProps {
   currentLang: Language;
   onLanguageChange: (lang: Language) => void;
   isPlayingAudio: boolean;
   onToggleAudio: () => void;
-  onReopenDoor?: () => void;
+  onReopenDoor: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -19,138 +18,153 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleAudio,
   onReopenDoor,
 }) => {
-  const content = uiContent[currentLang];
+  const content = storyboardContent[currentLang].nav;
+  const [activeSection, setActiveSection] = useState<'home' | 'our-story' | 'details' | 'location'>('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
+
+      const sections = ['home', 'our-story', 'details', 'location'] as const;
+      const scrollPos = window.scrollY + 200;
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: '#hero', label: content.nav.entrance },
-    { href: '#invitation', label: content.nav.invitation },
-    { href: '#rituals', label: content.nav.rituals },
-    { href: '#features', label: content.nav.features },
-    { href: '#journey', label: content.nav.journey },
-    { href: '#gallery', label: currentLang === 'te' ? 'చిత్ర మాలిక' : 'Gallery' },
-    { href: '#venue', label: content.nav.venue },
-    { href: '#blessings', label: content.nav.blessings },
-  ];
-
-  const handleNavClick = (href: string) => {
-    setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#FAF6EE]/95 backdrop-blur-md shadow-md border-b border-[#DFB76C]/60 py-2.5'
-          : 'bg-[#FAF6EE]/85 backdrop-blur-xs py-3.5'
+          ? 'bg-[#F9F6EF]/95 backdrop-blur-md shadow-xs py-3.5 border-b border-[#EBDDC8]'
+          : 'bg-[#F9F6EF] py-5 border-b border-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-        {/* Logo / Monogram */}
-        <button
-          type="button"
-          onClick={() => {
-            if (onReopenDoor) {
-              onReopenDoor();
-            } else {
-              handleNavClick('#hero');
-            }
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 flex items-center justify-between">
+        {/* Couple Brand Name matching Panel 3 */}
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('home');
           }}
-          className="flex items-center gap-2 text-[#782A15] font-bold text-base sm:text-lg font-telugu group cursor-pointer text-left"
-          title={currentLang === 'te' ? 'సింహద్వారం చూడండి' : 'View Simhadwaram Door'}
+          className="font-display text-2xl sm:text-3xl text-[#482B19] font-medium tracking-tight hover:opacity-90 transition-opacity"
         >
-          <span className="p-1 rounded-lg bg-[#9C4129] text-[#DFB76C] shadow-2xs group-hover:rotate-12 transition-transform">
-            <Home className="w-4 h-4" />
-          </span>
-          <span className="tracking-tight">{invitationData.venue.name[currentLang]}</span>
-          <span className="text-xs text-[#D49B28] font-sans-en">
-            • {invitationData.couple.groom.firstName} &amp; {invitationData.couple.bride.firstName}
-          </span>
-        </button>
+          {content.brand}
+        </a>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-5" aria-label="Main Navigation">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              type="button"
-              onClick={() => handleNavClick(link.href)}
-              className="text-xs font-bold text-[#542813] hover:text-[#9C4129] font-telugu transition-colors cursor-pointer"
-            >
-              {link.label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Controls: Audio Toggle + Language Toggle */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Audio Button */}
+        {/* Center / Right Editorial Navigation Links */}
+        <nav className="flex items-center gap-6 sm:gap-9">
           <button
-            type="button"
-            onClick={onToggleAudio}
-            aria-label={isPlayingAudio ? 'సంగీతం నిశ్శబ్దం / Mute' : 'మంగళ వాయిద్యం / Play'}
-            title={isPlayingAudio ? 'సంగీతం నిశ్శబ్దం / Mute' : 'మంగళ వాయిద్యం / Play'}
-            className={`p-2 rounded-full border transition-all cursor-pointer ${
-              isPlayingAudio
-                ? 'bg-[#9C4129] text-[#FAF6EE] border-[#DFB76C] animate-pulse'
-                : 'bg-white text-[#782A15] border-[#DFB76C] hover:bg-[#EFE3D0]'
+            onClick={() => scrollToSection('home')}
+            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+              activeSection === 'home'
+                ? 'text-[#482B19] font-semibold'
+                : 'text-[#684329]/80 hover:text-[#482B19]'
             }`}
           >
-            {isPlayingAudio ? (
-              <Volume2 className="w-4 h-4 text-[#DFB76C]" />
-            ) : (
-              <VolumeX className="w-4 h-4 text-[#782A15]" />
+            {content.home}
+            {activeSection === 'home' && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B86C3C] rounded-full" />
             )}
           </button>
 
-          {/* Language Toggle */}
-          <LanguageToggle
-            currentLang={currentLang}
-            onLanguageChange={onLanguageChange}
-          />
-
-          {/* Mobile Menu Button */}
           <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-full text-[#782A15] hover:bg-[#D49B28]/20 transition-colors"
-            aria-label="Toggle navigation menu"
+            onClick={() => scrollToSection('our-story')}
+            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+              activeSection === 'our-story'
+                ? 'text-[#482B19] font-semibold'
+                : 'text-[#684329]/80 hover:text-[#482B19]'
+            }`}
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {content.ourStory}
+            {activeSection === 'our-story' && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B86C3C] rounded-full" />
+            )}
           </button>
-        </div>
-      </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FAF6EE] border-b border-[#DFB76C] px-4 py-4 shadow-xl">
-          <div className="grid grid-cols-2 gap-2">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                type="button"
-                onClick={() => handleNavClick(link.href)}
-                className="text-left py-2 px-3 rounded-lg text-xs sm:text-sm font-bold text-[#542813] hover:bg-[#EFE3D0] hover:text-[#9C4129] font-telugu transition-colors"
-              >
-                {link.label}
-              </button>
-            ))}
+          <button
+            onClick={() => scrollToSection('details')}
+            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+              activeSection === 'details'
+                ? 'text-[#482B19] font-semibold'
+                : 'text-[#684329]/80 hover:text-[#482B19]'
+            }`}
+          >
+            {content.details}
+            {activeSection === 'details' && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B86C3C] rounded-full" />
+            )}
+          </button>
+
+          <button
+            onClick={() => scrollToSection('location')}
+            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+              activeSection === 'location'
+                ? 'text-[#482B19] font-semibold'
+                : 'text-[#684329]/80 hover:text-[#482B19]'
+            }`}
+          >
+            {content.location}
+            {activeSection === 'location' && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B86C3C] rounded-full" />
+            )}
+          </button>
+
+          {/* Controls: Language toggle + Audio + Reopen Doors */}
+          <div className="flex items-center gap-2.5 ml-2 pl-3 border-l border-[#D9CDB8]">
+            {/* Language toggle: English default */}
+            <button
+              onClick={() => onLanguageChange(currentLang === 'en' ? 'te' : 'en')}
+              className="cursor-pointer text-xs font-semibold px-2.5 py-1 rounded-md border border-[#B59A66]/60 text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
+              title={currentLang === 'en' ? 'తెలుగులో చూడండి' : 'Switch to English'}
+            >
+              {currentLang === 'en' ? 'తెలుగు' : 'English'}
+            </button>
+
+            {/* Audio Toggle */}
+            <button
+              onClick={onToggleAudio}
+              className="cursor-pointer p-1.5 rounded-full text-[#684329] hover:text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
+              title={isPlayingAudio ? 'Mute Music' : 'Play Music'}
+              aria-label="Toggle background flute audio"
+            >
+              {isPlayingAudio ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            </button>
+
+            {/* Replay Entrance Experience */}
+            <button
+              onClick={onReopenDoor}
+              className="cursor-pointer p-1.5 rounded-full text-[#684329] hover:text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
+              title="Experience Entrance Again"
+              aria-label="Replay Entrance Screen"
+            >
+              <RotateCcw size={15} />
+            </button>
           </div>
-        </div>
-      )}
+        </nav>
+      </div>
     </header>
   );
 };

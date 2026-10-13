@@ -1,22 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --color-terracotta: #9C4129;
-  --color-terracotta-dark: #782A15;
-  --color-teak: #542813;
-  --color-teak-dark: #381A0B;
-  --color-turmeric: #D49B28;
-  --color-brass: #DFB76C;
-  --color-brass-dark: #A97A24;
-  --color-mango: #2C5E3B;
-  --color-mango-dark: #1C3D26;
-  --color-ivory: #FAF6EE;
-  --color-sand: #EFE3D0;
+  /* UX Reference Exact Color Palette */
+  --color-warm-ivory: #F6F1E8;
+  --color-soft-cream: #F9F6EF;
+  --color-teak-brown: #684329;
+  --color-deep-brown: #482B19;
+  --color-terracotta: #B86C3C;
+  --color-brass: #B59A66;
+  --color-botanical-green: #697654;
 
   --font-telugu-serif: 'Noto Serif Telugu', Georgia, serif;
   --font-telugu-sans: 'Noto Sans Telugu', system-ui, sans-serif;
   --font-en-serif: 'Cormorant Garamond', Georgia, serif;
   --font-en-sans: 'Inter', system-ui, sans-serif;
+  --font-signature: 'Great Vibes', cursive;
+}
+
+.font-display {
+  font-family: var(--font-en-serif);
+}
+
+.font-signature {
+  font-family: var(--font-signature);
 }
 
 .font-telugu {
@@ -33,16 +39,6 @@
 
 .font-sans-en {
   font-family: var(--font-en-sans);
-}
-
-/* Warm textured linen & threshold pattern */
-.bg-house-warm {
-  background-color: #FAF6EE;
-  background-image: 
-    radial-gradient(#D49B28 0.75px, transparent 0.75px),
-    radial-gradient(#9C4129 0.5px, #FAF6EE 0.5px);
-  background-size: 28px 28px;
-  background-position: 0 0, 14px 14px;
 }
 
 /* Fullscreen Door 3D Perspective */

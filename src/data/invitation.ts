@@ -1,5 +1,188 @@
 export type Language = 'te' | 'en';
 
+export interface StoryboardSectionContent {
+  entrance: {
+    heading: string;
+    subheadingTe: string;
+    openBtn: string;
+  };
+  nav: {
+    brand: string;
+    home: string;
+    ourStory: string;
+    details: string;
+    location: string;
+  };
+  hero: {
+    eyebrow: string;
+    titleLine1: string;
+    titleLine2: string;
+    teluguSubtitleLine1: string;
+    teluguSubtitleLine2: string;
+    englishSubtitle: string;
+    date: string;
+  };
+  story: {
+    eyebrow: string;
+    titleLine1: string;
+    titleLine2: string;
+    p1: string;
+    p2: string;
+  };
+  details: {
+    eyebrow: string;
+    title: string;
+    dateDay: string;
+    dateFull: string;
+    timeLabel: string;
+    timeValue: string;
+  };
+  location: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    mapBtn: string;
+    discreetNote: string;
+  };
+  invitation: {
+    eyebrow: string;
+    title: string;
+    teluguQuoteLine1: string;
+    teluguQuoteLine2: string;
+    englishMessage: string;
+    signOff: string;
+    coupleNames: string;
+  };
+  footer: {
+    closingQuote: string;
+    brand: string;
+    date: string;
+  };
+}
+
+export const storyboardContent: Record<Language, StoryboardSectionContent> = {
+  en: {
+    entrance: {
+      heading: 'A New\nChapter Begins...',
+      subheadingTe: 'మా కొత్త ఇంటికి స్వాగతం',
+      openBtn: 'OPEN THE DOOR →',
+    },
+    nav: {
+      brand: 'Bikas & Bhargavi',
+      home: 'Home',
+      ourStory: 'Our Story',
+      details: 'Details',
+      location: 'Location',
+    },
+    hero: {
+      eyebrow: 'OUR GRUHAPRAVESAM',
+      titleLine1: 'A Home',
+      titleLine2: 'Full of Love',
+      teluguSubtitleLine1: 'మా కొత్త ఇంటికి గృహప్రవేశానికి',
+      teluguSubtitleLine2: 'మిమ్మల్ని ఆహ్వానిస్తున్నాము',
+      englishSubtitle: 'Join us as we step into a new beginning.',
+      date: 'Monday, 16 November 2026',
+    },
+    story: {
+      eyebrow: 'OUR STORY',
+      titleLine1: 'A Place to',
+      titleLine2: 'Call Home',
+      p1: 'Every home has a story, and ours is built with dreams, blessings and the love of family and friends.',
+      p2: 'We are delighted to invite you to be a part of this special milestone in our journey.',
+    },
+    details: {
+      eyebrow: 'THE CELEBRATION',
+      title: 'Gruhapravesam',
+      dateDay: 'Monday',
+      dateFull: '16 November 2026',
+      timeLabel: 'To be',
+      timeValue: 'confirmed',
+    },
+    location: {
+      eyebrow: 'THE LOCATION',
+      title: 'Come Home',
+      subtitle: 'We would be happy to have you with us at our new home.',
+      mapBtn: 'Open in Google Maps →',
+      discreetNote: 'Address will be shared personally.',
+    },
+    invitation: {
+      eyebrow: 'OUR INVITATION',
+      title: "You're Invited",
+      teluguQuoteLine1: 'మా గృహప్రవేశానికి',
+      teluguQuoteLine2: 'మీ సాన్నిధ్యం మా ఆనందం',
+      englishMessage:
+        'We warmly invite you to join us for our Gruhapravesam and seek your blessings as we begin this new chapter in our lives.',
+      signOff: 'With love,',
+      coupleNames: 'Bikas & Bhargavi',
+    },
+    footer: {
+      closingQuote: 'May our new home be blessed with eternal love, peace, and abundance.',
+      brand: 'Bikas & Bhargavi',
+      date: '16 November 2026',
+    },
+  },
+  te: {
+    entrance: {
+      heading: 'నూతన ఆరంభం...',
+      subheadingTe: 'మా కొత్త ఇంటికి స్వాగతం',
+      openBtn: 'ద్వారం తెరవండి →',
+    },
+    nav: {
+      brand: 'బికాస్ & భార్గవి',
+      home: 'ప్రారంభం',
+      ourStory: 'మా కథ',
+      details: 'వివరాలు',
+      location: 'చిరునామా',
+    },
+    hero: {
+      eyebrow: 'మా గృహప్రవేశం',
+      titleLine1: 'ప్రేమతో నిండిన',
+      titleLine2: 'మా నిలయం',
+      teluguSubtitleLine1: 'మా కొత్త ఇంటికి గృహప్రవేశానికి',
+      teluguSubtitleLine2: 'మిమ్మల్ని ఆహ్వానిస్తున్నాము',
+      englishSubtitle: 'మా నూతన ప్రయాణంలో మీరందరూ భాగస్వాములు కావాలని కోరుకుంటున్నాము.',
+      date: 'సోమవారం, 16 నవంబర్ 2026',
+    },
+    story: {
+      eyebrow: 'మా కథ',
+      titleLine1: 'కలల గృహం',
+      titleLine2: 'మా నిలయం',
+      p1: 'ప్రతి ఇంటికీ ఒక అందమైన కథ ఉంటుంది. మా ఇల్లు కలలు, పెద్దల దీవెనలు మరియు కుటుంబం, స్నేహితుల ప్రేమతో నిర్మించబడింది.',
+      p2: 'మా జీవితంలో ఈ పవిత్ర మైలురాయిని మీతో కలిసి జరుపుకోవడానికి మిమ్మల్ని సాదరంగా ఆహ్వానిస్తున్నాము.',
+    },
+    details: {
+      eyebrow: 'శుభ మహోత్సవం',
+      title: 'గృహప్రవేశం',
+      dateDay: 'సోమవారం',
+      dateFull: '16 నవంబర్ 2026',
+      timeLabel: 'సమయం',
+      timeValue: 'త్వరలో తెలియజేయబడును',
+    },
+    location: {
+      eyebrow: 'వేదిక',
+      title: 'మా ఇంటికి రండి',
+      subtitle: 'మా కొత్త ఇంట్లో మిమ్మల్ని చూడటం మాకెంతో ఆనందం.',
+      mapBtn: 'గూగుల్ మ్యాప్స్‌లో చూడండి →',
+      discreetNote: 'చిరునామా వివరాలు త్వరలో వ్యక్తిగతంగా తెలియజేయబడును.',
+    },
+    invitation: {
+      eyebrow: 'ఆహ్వానం',
+      title: 'మీకు సాదర ఆహ్వానం',
+      teluguQuoteLine1: 'మా గృహప్రవేశానికి',
+      teluguQuoteLine2: 'మీ సాన్నిధ్యం మా ఆనందం',
+      englishMessage:
+        'మా గృహప్రవేశ మహోత్సవంలో పాల్గొని, మా నూతన జీవితానికి మీ అమూల్యమైన ఆశీస్సులను అందించవలసిందిగా మనస్ఫూర్తిగా కోరుతున్నాము.',
+      signOff: 'ప్రేమతో,',
+      coupleNames: 'బికాస్ & భార్గవి',
+    },
+    footer: {
+      closingQuote: 'మా నూతన గృహానికి మీ ఆశీస్సులే మాకు కొండంత బలం.',
+      brand: 'బికాస్ & భార్గవి',
+      date: '16 నవంబర్ 2026',
+    },
+  },
+};
+
 export interface BilingualText {
   te: string;
   en: string;

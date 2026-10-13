@@ -3,15 +3,14 @@ import type { Language } from './data/invitation';
 import { OpeningScreen } from './components/OpeningScreen';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { InvitationSection } from './components/InvitationSection';
-import { CeremonySection } from './components/CeremonySection';
-import { HouseFeaturesSection } from './components/HouseFeaturesSection';
-import { JourneySection } from './components/JourneySection';
-import { GallerySection } from './components/GallerySection';
-import { VenueSection } from './components/VenueSection';
-import { BlessingsSection } from './components/BlessingsSection';
+import { OurStorySection } from './components/OurStorySection';
+import { EventDetailsSection } from './components/EventDetailsSection';
+import { LocationSection } from './components/LocationSection';
+import { InvitationMessageSection } from './components/InvitationMessageSection';
+import { FooterSection } from './components/FooterSection';
 
 export const App: React.FC = () => {
+  // English is default across the entire application as requested
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [isDoorOpen, setIsDoorOpen] = useState<boolean>(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
@@ -24,7 +23,7 @@ export const App: React.FC = () => {
   const handleOpenDoor = () => {
     setIsDoorOpen(true);
     if (audioRef.current) {
-      audioRef.current.volume = 0.35;
+      audioRef.current.volume = 0.3;
       audioRef.current
         .play()
         .then(() => setIsPlayingAudio(true))
@@ -39,7 +38,7 @@ export const App: React.FC = () => {
       audioRef.current.pause();
       setIsPlayingAudio(false);
     } else {
-      audioRef.current.volume = 0.35;
+      audioRef.current.volume = 0.3;
       audioRef.current
         .play()
         .then(() => setIsPlayingAudio(true))
@@ -48,8 +47,8 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF6EE] bg-house-warm flex flex-col text-[#381A0B] relative selection:bg-[#D49B28]/30 selection:text-[#782A15]">
-      {/* Background Audio */}
+    <div className="min-h-screen bg-[#F9F6EF] flex flex-col text-[#482B19] relative selection:bg-[#B59A66]/30 selection:text-[#482B19]">
+      {/* Background traditional flute audio */}
       <audio
         ref={audioRef}
         src="/assets/audio/traditional-flute.mp3"
@@ -57,41 +56,45 @@ export const App: React.FC = () => {
         preload="auto"
       />
 
-      {/* Accessible skip link */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 bg-[#782A15] text-[#FAF6EE] px-4 py-2 rounded-lg font-bold"
-      >
-        Skip to housewarming content
-      </a>
-
-      {/* Simhadwaram Sacred Entrance Screen */}
+      {/* Screen 1 & 2: Fullscreen Entrance & Interactive 3D Door Swing Animation */}
       <OpeningScreen
         currentLang={currentLang}
         onOpen={handleOpenDoor}
         isOpen={isDoorOpen}
       />
 
-      {/* Navigation Bar */}
-      <Navbar
-        currentLang={currentLang}
-        onLanguageChange={setCurrentLang}
-        isPlayingAudio={isPlayingAudio}
-        onToggleAudio={handleToggleAudio}
-        onReopenDoor={() => setIsDoorOpen(false)}
-      />
+      {/* Screen 3: Invitation Reveal and Main Website */}
+      <div className={`flex flex-col flex-1 w-full transition-opacity duration-1000 ${isDoorOpen ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Navigation Bar matching Panel 3 */}
+        <Navbar
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          isPlayingAudio={isPlayingAudio}
+          onToggleAudio={handleToggleAudio}
+          onReopenDoor={() => setIsDoorOpen(false)}
+        />
 
-      {/* Main Content Area */}
-      <main id="main-content" className="flex-1 w-full max-w-5xl mx-auto px-2 sm:px-6">
-        <HeroSection currentLang={currentLang} />
-        <InvitationSection currentLang={currentLang} />
-        <CeremonySection currentLang={currentLang} />
-        <HouseFeaturesSection currentLang={currentLang} />
-        <JourneySection currentLang={currentLang} />
-        <GallerySection currentLang={currentLang} />
-        <VenueSection currentLang={currentLang} />
-        <BlessingsSection currentLang={currentLang} />
-      </main>
+        {/* Main Sections in Exact Reference Order */}
+        <main id="main-content" className="flex-1 w-full">
+          {/* Section A: Hero (Panel 3) */}
+          <HeroSection currentLang={currentLang} />
+
+          {/* Section B: Our Story (Panel 4) */}
+          <OurStorySection currentLang={currentLang} />
+
+          {/* Section C: Event Details (Panel 5) */}
+          <EventDetailsSection currentLang={currentLang} />
+
+          {/* Section D: Location (Panel 6) */}
+          <LocationSection currentLang={currentLang} />
+
+          {/* Section E: Invitation Message (Panel 7) */}
+          <InvitationMessageSection currentLang={currentLang} />
+        </main>
+
+        {/* Section F: Footer (Section 4.F) */}
+        <FooterSection currentLang={currentLang} />
+      </div>
     </div>
   );
 };

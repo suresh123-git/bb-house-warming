@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Bell, ArrowRight } from 'lucide-react';
-import { BrassDiya, ToranamBanner } from './Decorations';
+import React, { useState, useEffect } from 'react';
 import type { Language } from '../data/invitation';
-import { uiContent, invitationData } from '../data/invitation';
+import { storyboardContent } from '../data/invitation';
 
 interface OpeningScreenProps {
   currentLang: Language;
@@ -15,268 +13,257 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
   onOpen,
   isOpen,
 }) => {
-  const content = uiContent[currentLang];
-  const { couple, eventDate } = invitationData;
-  const [isOpening, setIsOpening] = useState(false);
-  const [bellRinging, setBellRinging] = useState(false);
-  const [isCompletelyOpen, setIsCompletelyOpen] = useState(false);
+  const content = storyboardContent[currentLang].entrance;
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [doorsSwung, setDoorsSwung] = useState(false);
+  const [fadeComplete, setFadeComplete] = useState(false);
 
-  if (isOpen && isCompletelyOpen) {
+  // If already opened previously and not animating, unmount
+  useEffect(() => {
+    if (isOpen && !isAnimating) {
+      setFadeComplete(true);
+    } else if (!isOpen) {
+      setFadeComplete(false);
+      setDoorsSwung(false);
+      setIsAnimating(false);
+    }
+  }, [isOpen, isAnimating]);
+
+  // Keyboard accessibility: Enter or Space to open the doors
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen && !isAnimating && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        handleOpenClick();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, isAnimating]);
+
+  if (fadeComplete) {
     return null;
   }
 
-  const handleRingAndOpen = () => {
-    if (isOpening) return;
-    setBellRinging(true);
-    setIsOpening(true);
+  const handleOpenClick = () => {
+    if (isAnimating || doorsSwung) return;
+    setIsAnimating(true);
 
-    // Auspicious temple bell chime synthesis
+    // Auspicious bell / chime audio synthesis fallback
     try {
-      const audioCtx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // High resonant chime A5
-      osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 1.2);
-      gain.gain.setValueAtTime(0.45, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 1.5);
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        // Temple chime harmonic tones (E5 + B5 + E6)
+        [659.25, 987.77, 1318.51].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(0.25 / (i + 1), ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.2);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.08);
+          osc.stop(ctx.currentTime + 2.5);
+        });
+      }
     } catch {
-      // Audio fallback
+      // Audio fallback silent
     }
 
+    // Trigger door swing inward after brief text fade
+    setTimeout(() => {
+      setDoorsSwung(true);
+    }, 200);
+
+    // Complete transition and notify parent
     setTimeout(() => {
       onOpen();
-    }, 600);
+    }, 1450);
 
     setTimeout(() => {
-      setIsCompletelyOpen(true);
-    }, 1800);
+      setFadeComplete(true);
+      setIsAnimating(false);
+    }, 2100);
   };
 
   return (
     <div
-      role="region"
-      aria-label="Simhadwaram Doorway"
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden simhadwaram-viewport bg-[#1a0c06] select-none transition-opacity duration-700 ${
-        isOpening && isOpen ? 'pointer-events-none' : ''
-      } ${isCompletelyOpen ? 'opacity-0' : 'opacity-100'}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Housewarming Entrance Doors"
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-radial from-[#F7F1E6] via-[#EFE6D6] to-[#E5DAC6] select-none transition-opacity duration-700 ${
+        isAnimating && doorsSwung ? 'pointer-events-none' : ''
+      } ${doorsSwung && isAnimating ? 'opacity-90' : 'opacity-100'}`}
+      style={{
+        opacity: fadeComplete ? 0 : 1,
+        transition: 'opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1)',
+      }}
     >
-      {/* Background golden light burst behind doors when opening */}
-      {isOpening && (
-        <div className="absolute inset-0 bg-gradient-radial from-[#F5D98B] via-[#DFB76C]/40 to-transparent z-0 animate-golden-burst" />
-      )}
+      {/* Aspect-ratio constrained Stage matching Panel 1 composition (990x855 = 1.15 aspect ratio) */}
+      <div className="relative w-full h-full max-w-[1200px] max-h-[100vh] flex items-center justify-center">
+        {/* Container for door frame and inner layers */}
+        <div
+          className="relative w-full h-full flex items-center justify-center"
+          style={{
+            // Keep proportional scaling while filling viewport
+            aspectRatio: '990 / 855',
+            maxHeight: '100vh',
+            maxWidth: 'calc(100vh * (990 / 855))',
+          }}
+        >
+          {/* ================= LAYER 0: DARK DOORWAY THRESHOLD CAVITY ================= */}
+          <div
+            className="absolute z-0 bg-[#2A1408]"
+            style={{
+              left: '19.5%',
+              top: '7.0%',
+              width: '61.0%',
+              height: '79.0%',
+            }}
+          />
 
-      {/* Top Lintel & Mango Toranam */}
-      <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
-        <ToranamBanner />
-        {/* Ornate Arch Header */}
-        <div className="bg-gradient-to-r from-[#401b0d] via-[#782A15] to-[#401b0d] border-b-2 border-[#DFB76C] py-2 px-4 text-center shadow-lg">
-          <p className="text-xs sm:text-sm font-bold text-[#DFB76C] font-telugu tracking-widest">
-            {content.omGanesh}
-          </p>
-          <p className="text-[10px] sm:text-xs text-[#FAF6EE]/80 italic mt-0.5 font-telugu">
-            {content.subInvocation}
-          </p>
-        </div>
-      </div>
+          {/* ================= LAYER 1: SUNLIT COURTYARD (BEHIND DOORS) ================= */}
+          <div
+            className="absolute z-1 overflow-hidden"
+            style={{
+              left: '19.5%',
+              top: '7.0%',
+              width: '61.0%',
+              height: '79.0%',
+            }}
+          >
+            {/* The sunlit courtyard photograph revealed upon opening */}
+            <img
+              src="/assets/reference_crops/courtyard_revealed_clean_hd.jpg"
+              alt="Sunlit courtyard"
+              className={`w-full h-full object-cover transition-transform duration-1000 ${
+                doorsSwung ? 'scale-105' : 'scale-100'
+              }`}
+            />
 
-      {/* ================= LEFT DOOR LEAF ================= */}
-      <div
-        className={`door-leaf door-leaf-left absolute top-0 left-0 w-1/2 h-full z-20 border-r-2 border-[#1f0c05] flex flex-col justify-between p-4 sm:p-8 shadow-2xl ${
-          isOpening ? 'door-open-left' : ''
-        }`}
-        style={{
-          backgroundImage: "linear-gradient(rgba(26, 11, 5, 0.4), rgba(26, 11, 5, 0.6)), url('/assets/images/simhadwaram.jpg')",
-          backgroundSize: '200% 100%',
-          backgroundPosition: 'left center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        {/* Left top carved details */}
-        <div className="pt-24 sm:pt-28">
-          <div className="w-full max-w-[260px] mx-auto rounded-xl p-3 bg-[#240e06]/85 border-2 border-[#DFB76C]/80 shadow-2xl backdrop-blur-xs">
-            <div className="flex justify-between items-center px-2 py-0.5">
-              <span className="text-[#DFB76C] text-xs">❖</span>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#DFB76C] font-telugu">
-                {currentLang === 'te' ? 'శుభ ప్రవేశం' : 'Auspicious Entrance'}
-              </span>
-              <span className="text-[#DFB76C] text-xs">❖</span>
-            </div>
-            {/* Carved relief motif */}
-            <div className="h-24 sm:h-36 rounded-lg bg-[#1a0904]/80 border border-[#DFB76C]/40 flex flex-col items-center justify-center p-2 text-center mt-1">
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-[#DFB76C] p-1 flex items-center justify-center bg-[#421a0d] shadow-md mb-1">
-                <span className="text-xl sm:text-3xl" role="img" aria-label="Goddess Lakshmi">🪷</span>
-              </div>
-              <p className="text-xs font-bold text-[#DFB76C] font-telugu">
-                {currentLang === 'te' ? 'శ్రీ గృహలక్ష్మీ ప్రసన్న' : 'Sri Griha Lakshmi'}
-              </p>
-              <p className="text-[10px] text-[#FAF6EE]/70 italic font-telugu">
-                {currentLang === 'te' ? 'సమృద్ధి & శాంతి' : 'Abundance & Peace'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Left brass latch bar & lotus studs */}
-        <div className="my-auto flex flex-col items-end pr-1 sm:pr-4">
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-[#DFB76C] border-2 border-[#782A15] shadow-lg flex items-center justify-center text-[10px] text-[#542813]">
-              ✦
-            </div>
-            <div className="w-14 sm:w-24 h-4 rounded-l-md bg-gradient-to-r from-[#B77B27] to-[#DFB76C] border-y border-l border-[#542813] shadow-md" />
-          </div>
-        </div>
-
-        {/* Left Bottom corner decorative stud */}
-        <div className="pb-16 sm:pb-20 pl-2">
-          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#DFB76C] border-2 border-[#782A15] shadow-lg flex items-center justify-center text-[10px] text-[#542813]">
-            ✦
-          </div>
-        </div>
-      </div>
-
-      {/* ================= RIGHT DOOR LEAF ================= */}
-      <div
-        className={`door-leaf door-leaf-right absolute top-0 right-0 w-1/2 h-full z-20 border-l-2 border-[#1f0c05] flex flex-col justify-between p-4 sm:p-8 shadow-2xl ${
-          isOpening ? 'door-open-right' : ''
-        }`}
-        style={{
-          backgroundImage: "linear-gradient(rgba(26, 11, 5, 0.4), rgba(26, 11, 5, 0.6)), url('/assets/images/simhadwaram.jpg')",
-          backgroundSize: '200% 100%',
-          backgroundPosition: 'right center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        {/* Right top carved details */}
-        <div className="pt-24 sm:pt-28">
-          <div className="w-full max-w-[260px] mx-auto rounded-xl p-3 bg-[#240e06]/85 border-2 border-[#DFB76C]/80 shadow-2xl backdrop-blur-xs">
-            <div className="flex justify-between items-center px-2 py-0.5">
-              <span className="text-[#DFB76C] text-xs">❖</span>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#DFB76C] font-telugu">
-                {currentLang === 'te' ? 'సింహద్వారం' : 'Sri Nilayam'}
-              </span>
-              <span className="text-[#DFB76C] text-xs">❖</span>
-            </div>
-            {/* Carved relief motif */}
-            <div className="h-24 sm:h-36 rounded-lg bg-[#1a0904]/80 border border-[#DFB76C]/40 flex flex-col items-center justify-center p-2 text-center mt-1">
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-[#DFB76C] p-1 flex items-center justify-center bg-[#421a0d] shadow-md mb-1">
-                <span className="text-xl sm:text-3xl" role="img" aria-label="Lord Ganesha">🐘</span>
-              </div>
-              <p className="text-xs font-bold text-[#DFB76C] font-telugu">
-                {currentLang === 'te' ? 'శ్రీ విఘ్నేశ్వర ప్రసన్న' : 'Lord Vigneshwara'}
-              </p>
-              <p className="text-[10px] text-[#FAF6EE]/70 italic font-telugu">
-                {currentLang === 'te' ? 'అవిఘ్నమస్తు' : 'Divine Protection'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right brass latch bar & lotus studs */}
-        <div className="my-auto flex flex-col items-start pl-1 sm:pl-4">
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <div className="w-14 sm:w-24 h-4 rounded-r-md bg-gradient-to-l from-[#B77B27] to-[#DFB76C] border-y border-r border-[#542813] shadow-md" />
-            <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-[#DFB76C] border-2 border-[#782A15] shadow-lg flex items-center justify-center text-[10px] text-[#542813]">
-              ✦
-            </div>
-          </div>
-        </div>
-
-        {/* Right Bottom corner decorative stud */}
-        <div className="pb-16 sm:pb-20 pr-2 flex justify-end">
-          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#DFB76C] border-2 border-[#782A15] shadow-lg flex items-center justify-center text-[10px] text-[#542813]">
-            ✦
-          </div>
-        </div>
-      </div>
-
-      {/* ================= CENTER DOOR LATCH & INTERACTIVE KNOCKER ================= */}
-      <div
-        className={`absolute z-30 flex flex-col items-center justify-center px-4 max-w-sm sm:max-w-md w-full text-center transition-all duration-700 ${
-          isOpening ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'
-        }`}
-      >
-        {/* Sacred Auspicious Plate */}
-        <div className="rounded-2xl p-5 sm:p-7 bg-[#240e06]/95 border-2 border-[#DFB76C] shadow-2xl backdrop-blur-md">
-          {/* Top small icon */}
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-[#DFB76C] text-sm">✦</span>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#DFB76C]">
-              {currentLang === 'te' ? 'గృహప్రవేశ ఆహ్వానం' : 'Housewarming Invitation'}
-            </span>
-            <span className="text-[#DFB76C] text-sm">✦</span>
+            {/* Warm sunlight burst / ray expansion effect as doors swing open */}
+            <div
+              className={`absolute inset-0 bg-radial from-[#FFF3D6] via-[#F8DE9E]/40 to-transparent mix-blend-screen transition-opacity duration-1000 ${
+                doorsSwung ? 'opacity-80 scale-110' : 'opacity-0 scale-90'
+              }`}
+            />
           </div>
 
-          {/* Couple's Names */}
-          <h1 className="text-2xl sm:text-3xl font-bold text-white font-serif-en mb-0.5">
-            {couple.groom.firstName} &amp; {couple.bride.firstName}
-          </h1>
-
-          <p className="text-xs text-[#DFB76C] font-telugu font-semibold">
-            {currentLang === 'te' ? 'నూతన గృహస్థులు' : 'New Homeowners'} • Sri Nilayam
-          </p>
-
-          <div className="my-3 py-1.5 px-3.5 rounded-full bg-[#782A15] text-[#FAF6EE] text-[11px] sm:text-xs font-bold inline-block border border-[#DFB76C]/60 shadow-xs">
-            📅 {eventDate.fullDate[currentLang]} ({eventDate.dayOfWeek[currentLang]})
-          </div>
-
-          <p className="text-xs text-[#FAF6EE]/85 leading-relaxed font-telugu mb-5">
-            {currentLang === 'te'
-              ? 'గంట మోగించి సింహద్వారం తెరిచి మా నూతన గృహంలోకి అడుగిడండి...'
-              : 'Ring the temple bell and open the sacred doorway to step into our new home...'}
-          </p>
-
-          {/* MAIN OPEN DOOR BUTTON / BELL KNOCKER */}
-          <div className="flex items-center justify-center gap-3">
-            <BrassDiya size={24} />
-
-            <button
-              type="button"
-              onClick={handleRingAndOpen}
-              autoFocus
-              className="group relative inline-flex items-center justify-center gap-2.5 px-7 sm:px-9 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#D49B28] via-[#DFB76C] to-[#D49B28] text-[#381A0B] font-bold text-sm sm:text-base shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#782A15] cursor-pointer"
+          {/* ================= LAYER 2: 3D MOVABLE DOOR PANELS ================= */}
+          <div
+            className="absolute z-10 flex"
+            style={{
+              left: '19.5%',
+              top: '7.0%',
+              width: '61.0%',
+              height: '79.0%',
+              perspective: '1400px',
+              perspectiveOrigin: '50% 50%',
+            }}
+          >
+            {/* LEFT DOOR PANEL */}
+            <div
+              className="w-1/2 h-full relative"
+              style={{
+                transformOrigin: 'left center',
+                transform: doorsSwung ? 'rotateY(-105deg)' : 'rotateY(0deg)',
+                transition: 'transform 1.4s cubic-bezier(0.25, 1, 0.4, 1)',
+                transformStyle: 'preserve-3d',
+                boxShadow: doorsSwung
+                  ? '-20px 0 35px rgba(0, 0, 0, 0.65)'
+                  : 'none',
+              }}
             >
-              <Bell
-                className={`w-5 h-5 text-[#782A15] ${
-                  bellRinging ? 'animate-bell-ring' : 'group-hover:rotate-12'
-                } transition-transform`}
+              <img
+                src="/assets/reference_crops/door_leaf_left_hd.jpg"
+                alt="Left Door"
+                className="w-full h-full object-fill pointer-events-none"
               />
-              <span className={currentLang === 'te' ? 'font-telugu' : 'font-sans-en font-bold'}>
-                {currentLang === 'te' ? 'సింహద్వారం తెరవండి 🔔' : 'Ring Bell & Open Door 🔔'}
-              </span>
-              <ArrowRight className="w-4 h-4 text-[#782A15] group-hover:translate-x-1 transition-transform" />
-            </button>
-
-            <BrassDiya size={24} />
-          </div>
-        </div>
-      </div>
-
-      {/* ================= BOTTOM SACRED THRESHOLD (గడప) ================= */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
-        {/* Turmeric & Kumkum Yellow Step */}
-        <div className="h-6 sm:h-8 w-full bg-gradient-to-r from-[#B77B27] via-[#D49B28] to-[#B77B27] border-t-2 border-[#DFB76C] flex items-center justify-around px-4 shadow-md">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#782A15] shadow-2xs" />
-              <span className="text-[#782A15] text-[10px] font-bold">卐</span>
+              {/* Dynamic 3D lighting shadow overlay as door swings inward */}
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none transition-opacity duration-1000"
+                style={{ opacity: doorsSwung ? 0.6 : 0 }}
+              />
             </div>
-          ))}
-        </div>
 
-        {/* Floor Rangoli & Brass Diyas */}
-        <div className="bg-[#FAF6EE] py-2 px-6 flex items-center justify-between border-t border-[#DFB76C]/60 shadow-lg">
-          <BrassDiya size={28} />
-          <div className="text-center font-telugu text-[11px] text-[#782A15] font-bold">
-            {currentLang === 'te'
-              ? '॥ శుభం భవతు • సుస్వాగతం ॥'
-              : '|| Shubham Bhavatu • Cordial Welcome ||'}
+            {/* RIGHT DOOR PANEL */}
+            <div
+              className="w-1/2 h-full relative"
+              style={{
+                transformOrigin: 'right center',
+                transform: doorsSwung ? 'rotateY(105deg)' : 'rotateY(0deg)',
+                transition: 'transform 1.4s cubic-bezier(0.25, 1, 0.4, 1)',
+                transformStyle: 'preserve-3d',
+                boxShadow: doorsSwung
+                  ? '20px 0 35px rgba(0, 0, 0, 0.65)'
+                  : 'none',
+              }}
+            >
+              <img
+                src="/assets/reference_crops/door_leaf_right_hd.jpg"
+                alt="Right Door"
+                className="w-full h-full object-fill pointer-events-none"
+              />
+              {/* Dynamic 3D lighting shadow overlay as door swings inward */}
+              <div
+                className="absolute inset-0 bg-gradient-to-l from-black/40 to-transparent pointer-events-none transition-opacity duration-1000"
+                style={{ opacity: doorsSwung ? 0.6 : 0 }}
+              />
+            </div>
           </div>
-          <BrassDiya size={28} />
+
+          {/* ================= LAYER 3: FRAME & SURROUND (LANTERNS, PLANTS, RANGOLI, URLIS) ================= */}
+          <div className="absolute inset-0 z-20 pointer-events-none">
+            <img
+              src="/assets/reference_crops/door_frame_clean_hd.png"
+              alt="Entrance Frame"
+              className="w-full h-full object-fill"
+            />
+          </div>
+
+          {/* ================= LAYER 4: CENTERED TYPOGRAPHY & INTERACTIVE BUTTON ================= */}
+          <div
+            className={`absolute z-30 flex flex-col items-center justify-center text-center px-4 transition-all duration-400 ${
+              isAnimating ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
+            }`}
+            style={{
+              left: '20.2%',
+              top: '18%',
+              width: '59.6%',
+              height: '55%',
+            }}
+          >
+            {/* English Heading matching Panel 1 */}
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+              A New
+              <br />
+              Chapter Begins...
+            </h1>
+
+            {/* Authentic Telugu Greeting beneath English heading */}
+            <p className="font-telugu text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+              {content.subheadingTe}
+            </p>
+
+            {/* Subtle brass divider with ornament */}
+            <div className="flex items-center justify-center gap-2 my-4 md:my-5 w-44 opacity-85">
+              <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[#B59A66]" />
+              <span className="text-[#B59A66] text-xs">❖</span>
+              <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[#B59A66]" />
+            </div>
+
+            {/* Prominent Ivory Pill Button: OPEN THE DOOR → */}
+            <button
+              onClick={handleOpenClick}
+              disabled={isAnimating || doorsSwung}
+              className="group cursor-pointer bg-[#F6F1E8] hover:bg-white text-[#482B19] active:scale-95 font-sans font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/50"
+              aria-label="Open the door to enter housewarming invitation"
+            >
+              <span>{content.openBtn}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
