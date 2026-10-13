@@ -9,6 +9,7 @@ interface NavbarProps {
   onLanguageChange: (lang: Language) => void;
   isPlayingAudio: boolean;
   onToggleAudio: () => void;
+  onReopenDoor?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -16,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onLanguageChange,
   isPlayingAudio,
   onToggleAudio,
+  onReopenDoor,
 }) => {
   const content = uiContent[currentLang];
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,18 +60,26 @@ export const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
         {/* Logo / Monogram */}
-        <a
-          href="#hero"
-          className="flex items-center gap-2 text-[#782A15] font-bold text-base sm:text-lg font-telugu group"
+        <button
+          type="button"
+          onClick={() => {
+            if (onReopenDoor) {
+              onReopenDoor();
+            } else {
+              handleNavClick('#hero');
+            }
+          }}
+          className="flex items-center gap-2 text-[#782A15] font-bold text-base sm:text-lg font-telugu group cursor-pointer text-left"
+          title={currentLang === 'te' ? 'సింహద్వారం చూడండి' : 'View Simhadwaram Door'}
         >
-          <span className="p-1 rounded-lg bg-[#9C4129] text-[#DFB76C] shadow-2xs">
+          <span className="p-1 rounded-lg bg-[#9C4129] text-[#DFB76C] shadow-2xs group-hover:rotate-12 transition-transform">
             <Home className="w-4 h-4" />
           </span>
           <span className="tracking-tight">{invitationData.venue.name[currentLang]}</span>
           <span className="text-xs text-[#D49B28] font-sans-en">
             • {invitationData.couple.groom.firstName} &amp; {invitationData.couple.bride.firstName}
           </span>
-        </a>
+        </button>
 
         {/* Desktop Nav Links */}
         <nav className="hidden lg:flex items-center gap-5" aria-label="Main Navigation">

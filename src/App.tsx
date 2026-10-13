@@ -12,7 +12,7 @@ import { VenueSection } from './components/VenueSection';
 import { BlessingsSection } from './components/BlessingsSection';
 
 export const App: React.FC = () => {
-  const [currentLang, setCurrentLang] = useState<Language>('te');
+  const [currentLang, setCurrentLang] = useState<Language>('en');
   const [isDoorOpen, setIsDoorOpen] = useState<boolean>(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -78,6 +78,7 @@ export const App: React.FC = () => {
         onLanguageChange={setCurrentLang}
         isPlayingAudio={isPlayingAudio}
         onToggleAudio={handleToggleAudio}
+        onReopenDoor={() => setIsDoorOpen(false)}
       />
 
       {/* Main Content Area */}
