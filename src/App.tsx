@@ -18,6 +18,10 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     document.documentElement.lang = currentLang;
+    document.title =
+      currentLang === 'te'
+        ? 'బికాస్ & భార్గవి | గృహప్రవేశ ఆహ్వాన పత్రిక'
+        : 'Bikas & Bhargavi | House Warming Invitation';
   }, [currentLang]);
 
   const handleOpenDoor = () => {

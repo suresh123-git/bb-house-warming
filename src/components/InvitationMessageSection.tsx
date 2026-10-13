@@ -19,25 +19,25 @@ export const InvitationMessageSection: React.FC<InvitationMessageSectionProps> =
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* ================= LEFT COLUMN: INVITATION MESSAGE ================= */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Eyebrow: OUR INVITATION */}
-            <p className="font-sans text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-3">
+            {/* Eyebrow: OUR INVITATION / ఆహ్వానం */}
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-3`}>
               {content.eyebrow}
             </p>
 
             {/* Title: You're Invited */}
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal tracking-tight mb-5 sm:mb-6">
+            <h2 className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal tracking-tight mb-5 sm:mb-6`}>
               {content.title}
             </h2>
 
-            {/* Telugu Quote: మా గృహప్రవేశానికి మీ సాన్నిధ్యం మా ఆనందం */}
-            <div className="font-telugu text-xl sm:text-2xl text-[#B86C3C] font-medium leading-snug mb-4 sm:mb-5">
-              <p>{content.teluguQuoteLine1}</p>
-              <p>{content.teluguQuoteLine2}</p>
+            {/* Language-pure Quote lines */}
+            <div className={`${currentLang === 'te' ? 'font-telugu text-xl sm:text-2xl' : 'font-serif text-xl sm:text-2xl italic'} text-[#B86C3C] font-medium leading-snug mb-4 sm:mb-5`}>
+              <p>{content.quoteLine1}</p>
+              <p>{content.quoteLine2}</p>
             </div>
 
-            {/* English invitation paragraph */}
-            <p className="font-sans text-sm sm:text-base text-[#684329]/85 leading-relaxed max-w-md mb-8">
-              {content.englishMessage}
+            {/* Invitation paragraph */}
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-sm sm:text-base text-[#684329]/85 leading-relaxed max-w-md mb-8`}>
+              {content.message}
             </p>
 
             {/* Subtle brass lamp illustration */}
@@ -57,12 +57,12 @@ export const InvitationMessageSection: React.FC<InvitationMessageSectionProps> =
             </div>
 
             {/* Sign off */}
-            <p className="font-sans text-xs sm:text-sm text-[#684329]/80 mb-1">
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm text-[#684329]/80 mb-1`}>
               {content.signOff}
             </p>
 
-            {/* Cursive Couple Names: Bikas & Bhargavi */}
-            <p className="font-signature text-3xl sm:text-4xl text-[#482B19] tracking-wide mt-1">
+            {/* Couple Names */}
+            <p className={`${currentLang === 'te' ? 'font-telugu font-semibold text-2xl sm:text-3xl' : 'font-signature text-3xl sm:text-4xl'} text-[#482B19] tracking-wide mt-1`}>
               {content.coupleNames}
             </p>
           </div>

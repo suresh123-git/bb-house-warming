@@ -3,7 +3,7 @@ export type Language = 'te' | 'en';
 export interface StoryboardSectionContent {
   entrance: {
     heading: string;
-    subheadingTe: string;
+    subheading: string;
     openBtn: string;
   };
   nav: {
@@ -12,14 +12,18 @@ export interface StoryboardSectionContent {
     ourStory: string;
     details: string;
     location: string;
+    switchLangTooltip: string;
+    musicPlayTooltip: string;
+    musicMuteTooltip: string;
+    replayTooltip: string;
   };
   hero: {
     eyebrow: string;
     titleLine1: string;
     titleLine2: string;
-    teluguSubtitleLine1: string;
-    teluguSubtitleLine2: string;
-    englishSubtitle: string;
+    subtitleLine1: string;
+    subtitleLine2: string;
+    secondarySubtitle: string;
     date: string;
   };
   story: {
@@ -42,14 +46,15 @@ export interface StoryboardSectionContent {
     title: string;
     subtitle: string;
     mapBtn: string;
+    noticeText: string;
     discreetNote: string;
   };
   invitation: {
     eyebrow: string;
     title: string;
-    teluguQuoteLine1: string;
-    teluguQuoteLine2: string;
-    englishMessage: string;
+    quoteLine1: string;
+    quoteLine2: string;
+    message: string;
     signOff: string;
     coupleNames: string;
   };
@@ -57,6 +62,7 @@ export interface StoryboardSectionContent {
     closingQuote: string;
     brand: string;
     date: string;
+    subnote: string;
   };
 }
 
@@ -64,7 +70,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
   en: {
     entrance: {
       heading: 'A New\nChapter Begins...',
-      subheadingTe: 'మా కొత్త ఇంటికి స్వాగతం',
+      subheading: 'Welcome to Our New Home',
       openBtn: 'OPEN THE DOOR →',
     },
     nav: {
@@ -73,14 +79,18 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       ourStory: 'Our Story',
       details: 'Details',
       location: 'Location',
+      switchLangTooltip: 'Switch to Telugu',
+      musicPlayTooltip: 'Play Music',
+      musicMuteTooltip: 'Mute Music',
+      replayTooltip: 'Experience Entrance Again',
     },
     hero: {
-      eyebrow: 'OUR GRUHAPRAVESAM',
+      eyebrow: 'OUR HOUSE WARMING',
       titleLine1: 'A Home',
       titleLine2: 'Full of Love',
-      teluguSubtitleLine1: 'మా కొత్త ఇంటికి గృహప్రవేశానికి',
-      teluguSubtitleLine2: 'మిమ్మల్ని ఆహ్వానిస్తున్నాము',
-      englishSubtitle: 'Join us as we step into a new beginning.',
+      subtitleLine1: 'We warmly invite you to celebrate',
+      subtitleLine2: 'the beginning of our new home',
+      secondarySubtitle: 'Join us as we step into this beautiful new chapter together.',
       date: 'Monday, 16 November 2026',
     },
     story: {
@@ -92,26 +102,27 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     },
     details: {
       eyebrow: 'THE CELEBRATION',
-      title: 'Gruhapravesam',
+      title: 'House Warming',
       dateDay: 'Monday',
       dateFull: '16 November 2026',
-      timeLabel: 'To be',
-      timeValue: 'confirmed',
+      timeLabel: 'Muhurtham Time',
+      timeValue: 'To be confirmed',
     },
     location: {
       eyebrow: 'THE LOCATION',
       title: 'Come Home',
       subtitle: 'We would be happy to have you with us at our new home.',
       mapBtn: 'Open in Google Maps →',
+      noticeText: 'Venue details and live Google Maps directions will be shared personally soon.',
       discreetNote: 'Address will be shared personally.',
     },
     invitation: {
       eyebrow: 'OUR INVITATION',
       title: "You're Invited",
-      teluguQuoteLine1: 'మా గృహప్రవేశానికి',
-      teluguQuoteLine2: 'మీ సాన్నిధ్యం మా ఆనందం',
-      englishMessage:
-        'We warmly invite you to join us for our Gruhapravesam and seek your blessings as we begin this new chapter in our lives.',
+      quoteLine1: 'To our new home,',
+      quoteLine2: 'Your presence is our blessing',
+      message:
+        'We warmly invite you to join us for our House Warming ceremony and seek your blessings as we begin this new chapter in our lives.',
       signOff: 'With love,',
       coupleNames: 'Bikas & Bhargavi',
     },
@@ -119,12 +130,13 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       closingQuote: 'May our new home be blessed with eternal love, peace, and abundance.',
       brand: 'Bikas & Bhargavi',
       date: '16 November 2026',
+      subnote: 'House Warming Ceremony • 2026',
     },
   },
   te: {
     entrance: {
-      heading: 'నూతన ఆరంభం...',
-      subheadingTe: 'మా కొత్త ఇంటికి స్వాగతం',
+      heading: 'నూతన\nఆరంభం...',
+      subheading: 'మా కొత్త ఇంటికి స్వాగతం',
       openBtn: 'ద్వారం తెరవండి →',
     },
     nav: {
@@ -133,14 +145,18 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       ourStory: 'మా కథ',
       details: 'వివరాలు',
       location: 'చిరునామా',
+      switchLangTooltip: 'ఇంగ్లీష్‌లోకి మార్చండి',
+      musicPlayTooltip: 'సంగీతం వినండి',
+      musicMuteTooltip: 'సంగీతం నిలిపివేయండి',
+      replayTooltip: 'ప్రారంభం మరలా చూడండి',
     },
     hero: {
       eyebrow: 'మా గృహప్రవేశం',
       titleLine1: 'ప్రేమతో నిండిన',
       titleLine2: 'మా నిలయం',
-      teluguSubtitleLine1: 'మా కొత్త ఇంటికి గృహప్రవేశానికి',
-      teluguSubtitleLine2: 'మిమ్మల్ని ఆహ్వానిస్తున్నాము',
-      englishSubtitle: 'మా నూతన ప్రయాణంలో మీరందరూ భాగస్వాములు కావాలని కోరుకుంటున్నాము.',
+      subtitleLine1: 'మా కొత్త ఇంటి గృహప్రవేశ మహోత్సవానికి',
+      subtitleLine2: 'మిమ్మల్ని మరియు మీ కుటుంబాన్ని సాదరంగా ఆహ్వానిస్తున్నాము',
+      secondarySubtitle: 'మా నూతన ప్రయాణంలో మీరందరూ భాగస్వాములు కావాలని మనస్ఫూర్తిగా కోరుకుంటున్నాము.',
       date: 'సోమవారం, 16 నవంబర్ 2026',
     },
     story: {
@@ -155,7 +171,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       title: 'గృహప్రవేశం',
       dateDay: 'సోమవారం',
       dateFull: '16 నవంబర్ 2026',
-      timeLabel: 'సమయం',
+      timeLabel: 'శుభ ముహూర్తం',
       timeValue: 'త్వరలో తెలియజేయబడును',
     },
     location: {
@@ -163,14 +179,15 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       title: 'మా ఇంటికి రండి',
       subtitle: 'మా కొత్త ఇంట్లో మిమ్మల్ని చూడటం మాకెంతో ఆనందం.',
       mapBtn: 'గూగుల్ మ్యాప్స్‌లో చూడండి →',
+      noticeText: 'చిరునామా వివరాలు మరియు గూగుల్ మ్యాప్స్ లొకేషన్ త్వరలో వ్యక్తిగతంగా తెలియజేయబడును.',
       discreetNote: 'చిరునామా వివరాలు త్వరలో వ్యక్తిగతంగా తెలియజేయబడును.',
     },
     invitation: {
       eyebrow: 'ఆహ్వానం',
       title: 'మీకు సాదర ఆహ్వానం',
-      teluguQuoteLine1: 'మా గృహప్రవేశానికి',
-      teluguQuoteLine2: 'మీ సాన్నిధ్యం మా ఆనందం',
-      englishMessage:
+      quoteLine1: 'మా గృహప్రవేశానికి',
+      quoteLine2: 'మీ సాన్నిధ్యం మా ఆనందం',
+      message:
         'మా గృహప్రవేశ మహోత్సవంలో పాల్గొని, మా నూతన జీవితానికి మీ అమూల్యమైన ఆశీస్సులను అందించవలసిందిగా మనస్ఫూర్తిగా కోరుతున్నాము.',
       signOff: 'ప్రేమతో,',
       coupleNames: 'బికాస్ & భార్గవి',
@@ -179,6 +196,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       closingQuote: 'మా నూతన గృహానికి మీ ఆశీస్సులే మాకు కొండంత బలం.',
       brand: 'బికాస్ & భార్గవి',
       date: '16 నవంబర్ 2026',
+      subnote: 'గృహప్రవేశ మహోత్సవం • 2026',
     },
   },
 };
@@ -533,7 +551,7 @@ export const invitationData: InvitationData = {
       icon: '🚪',
     },
     {
-      stage: { te: 'గృహప్రవేశం (16 నవంబర్ 2026)', en: 'Gruhapravesam Day' },
+      stage: { te: 'గృహప్రవేశం (16 నవంబర్ 2026)', en: 'House Warming Day' },
       title: { te: 'పవిత్ర తొలి అడుగు', en: 'Stepping Across the Threshold' },
       description: {
         te: 'మీ సమక్షంలో, దైవ సమక్షంలో పాలు పొంగించి నూతన గృహంలోకి అడుగుపెడుతున్నాము.',
@@ -646,7 +664,7 @@ export const uiContent = {
     doorScreen: {
       tag: 'Simhadwaram • Auspicious Threshold',
       mainHeading: 'Welcome to Our New Home',
-      subHeading: 'Gruhapravesam Ceremony of Bikas & Bhargavi',
+      subHeading: 'House Warming Ceremony of Bikas & Bhargavi',
       dateText: 'Monday, 16 November 2026',
       instruction: 'Ring the temple bell and open the sacred doorway to step inside our home',
       enterBtn: 'Open Simhadwaram & Enter 🔔',
@@ -663,24 +681,24 @@ export const uiContent = {
       blessings: 'Blessings',
     },
     hero: {
-      eyebrow: 'Auspicious Gruhapravesam Celebration',
-      title: 'Our Gruhapravesam',
+      eyebrow: 'Auspicious House Warming Celebration',
+      title: 'Our House Warming',
       subtitle: 'A house is built of bricks and stone, but a home is sculpted with love, dreams, and sacred blessings.',
       homeownersBadge: 'New Homeowners: Bikas & Bhargavi',
-      dateLabel: 'Gruhapravesam Date',
+      dateLabel: 'House Warming Date',
       countdownTitle: 'Countdown to Stepping into Our Home',
       days: 'Days',
       hours: 'Hours',
       mins: 'Mins',
       secs: 'Secs',
-      eventPassed: 'The Gruhapravesam celebrations have commenced!',
+      eventPassed: 'The House Warming celebrations have commenced!',
     },
     invitation: {
       tag: 'Warm Invitation',
       title: 'Welcoming You to Our New Sanctuary',
       subtitle: 'Your gracious footsteps will sanctify our threshold with warmth and peace',
       salutation: 'Dearest Family, Elders, and Beloved Friends,',
-      p1: 'By the divine grace of the Almighty and the heartfelt blessings of our elders, our dream of creating a home filled with light and warmth has come true. We are overjoyed to invite you and your family to grace our Gruhapravesam ceremony.',
+      p1: 'By the divine grace of the Almighty and the heartfelt blessings of our elders, our dream of creating a home filled with light and warmth has come true. We are overjoyed to invite you and your family to grace our House Warming ceremony.',
       p2: 'As we cross this new threshold, kindle the sacred hearth, and boil the auspicious milk, your gracious presence and heartfelt blessings will turn this house into a home.',
       shloka: '|| Shubham Bhavatu • Kalyanam Ayurarogya Sampadah ||',
       shlokaMeaning: 'May this abode resonate with eternal health, harmony, and prosperity!',
@@ -688,7 +706,7 @@ export const uiContent = {
       familyGreeting: 'Together with the Jena & Diddi Families',
     },
     rituals: {
-      tag: 'Sacred Gruhapravesam Ceremonies',
+      tag: 'Sacred House Warming Ceremonies',
       title: 'The Four Pillars of Our Housewarming',
       subtitle: 'Traditional Telugu rituals consecrating our threshold and hearth',
       dateBadge: '16 November 2026 (Confirmed Date)',
@@ -728,8 +746,8 @@ export const uiContent = {
       signature: 'With love & gratitude — Bikas & Bhargavi',
     },
     footer: {
-      tagline: 'Sri Nilayam • Gruhapravesam Ceremony 2026',
-      builtNote: 'Crafted with authentic South Indian Gruhapravesam traditions',
+      tagline: 'Sri Nilayam • House Warming Ceremony 2026',
+      builtNote: 'Crafted with authentic South Indian House Warming traditions',
     },
   },
 };

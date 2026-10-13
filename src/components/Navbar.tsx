@@ -69,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             e.preventDefault();
             scrollToSection('home');
           }}
-          className="font-display text-2xl sm:text-3xl text-[#482B19] font-medium tracking-tight hover:opacity-90 transition-opacity"
+          className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-2xl sm:text-3xl text-[#482B19] font-medium tracking-tight hover:opacity-90 transition-opacity`}
         >
           {content.brand}
         </a>
@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <nav className="flex items-center gap-6 sm:gap-9">
           <button
             onClick={() => scrollToSection('home')}
-            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'home'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => scrollToSection('our-story')}
-            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'our-story'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -106,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => scrollToSection('details')}
-            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'details'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -120,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => scrollToSection('location')}
-            className={`font-sans text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'location'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -137,8 +137,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Language toggle: English default */}
             <button
               onClick={() => onLanguageChange(currentLang === 'en' ? 'te' : 'en')}
-              className="cursor-pointer text-xs font-semibold px-2.5 py-1 rounded-md border border-[#B59A66]/60 text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
-              title={currentLang === 'en' ? 'తెలుగులో చూడండి' : 'Switch to English'}
+              className={`cursor-pointer text-xs font-semibold px-2.5 py-1 rounded-md border border-[#B59A66]/60 text-[#482B19] hover:bg-[#F6F1E8] transition-colors ${
+                currentLang === 'en' ? 'font-telugu' : 'font-sans'
+              }`}
+              title={content.switchLangTooltip}
+              aria-label={content.switchLangTooltip}
             >
               {currentLang === 'en' ? 'తెలుగు' : 'English'}
             </button>
@@ -147,8 +150,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onToggleAudio}
               className="cursor-pointer p-1.5 rounded-full text-[#684329] hover:text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
-              title={isPlayingAudio ? 'Mute Music' : 'Play Music'}
-              aria-label="Toggle background flute audio"
+              title={isPlayingAudio ? content.musicMuteTooltip : content.musicPlayTooltip}
+              aria-label={isPlayingAudio ? content.musicMuteTooltip : content.musicPlayTooltip}
             >
               {isPlayingAudio ? <Volume2 size={16} /> : <VolumeX size={16} />}
             </button>
@@ -157,8 +160,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onReopenDoor}
               className="cursor-pointer p-1.5 rounded-full text-[#684329] hover:text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
-              title="Experience Entrance Again"
-              aria-label="Replay Entrance Screen"
+              title={content.replayTooltip}
+              aria-label={content.replayTooltip}
             >
               <RotateCcw size={15} />
             </button>

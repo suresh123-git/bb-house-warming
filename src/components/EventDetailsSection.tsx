@@ -17,13 +17,13 @@ export const EventDetailsSection: React.FC<EventDetailsSectionProps> = ({ curren
       className="relative w-full bg-[#F9F6EF] py-20 sm:py-28 overflow-hidden select-none border-t border-[#EBE2D3]"
     >
       <div className="max-w-4xl mx-auto px-6 sm:px-10 flex flex-col items-center text-center">
-        {/* Eyebrow: THE CELEBRATION */}
-        <p className="font-sans text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-3">
+        {/* Eyebrow: THE CELEBRATION / శుభ మహోత్సవం */}
+        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-3`}>
           {content.eyebrow}
         </p>
 
-        {/* Main Heading: Gruhapravesam */}
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal tracking-tight mb-8 sm:mb-10">
+        {/* Main Heading: House Warming / గృహప్రవేశం */}
+        <h2 className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal tracking-tight mb-8 sm:mb-10`}>
           {content.title}
         </h2>
 
@@ -34,23 +34,23 @@ export const EventDetailsSection: React.FC<EventDetailsSectionProps> = ({ curren
             <div className="w-10 h-10 rounded-full bg-[#FAF4EA] flex items-center justify-center text-[#B86C3C] mb-3">
               <Calendar size={20} strokeWidth={1.75} />
             </div>
-            <p className="font-sans text-xs sm:text-sm font-semibold text-[#482B19] tracking-wide">
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm font-semibold text-[#482B19] tracking-wide`}>
               {content.dateDay}
             </p>
-            <p className="font-sans text-[11px] sm:text-xs text-[#684329]/80 mt-0.5">
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-[11px] sm:text-xs text-[#684329]/80 mt-0.5`}>
               {content.dateFull}
             </p>
           </div>
 
-          {/* Card 2: Time (To be confirmed) */}
+          {/* Card 2: Time */}
           <div className="bg-[#FDFBF7] rounded-2xl p-5 sm:p-7 border border-[#E8DFD0] shadow-[0_4px_20px_rgba(72,43,25,0.04)] flex flex-col items-center justify-center transition-transform hover:-translate-y-1 duration-300">
             <div className="w-10 h-10 rounded-full bg-[#FAF4EA] flex items-center justify-center text-[#B86C3C] mb-3">
               <Clock size={20} strokeWidth={1.75} />
             </div>
-            <p className="font-sans text-xs sm:text-sm font-semibold text-[#482B19] tracking-wide">
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm font-semibold text-[#482B19] tracking-wide`}>
               {content.timeLabel}
             </p>
-            <p className="font-sans text-[11px] sm:text-xs text-[#684329]/80 mt-0.5">
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-[11px] sm:text-xs text-[#684329]/80 mt-0.5`}>
               {content.timeValue}
             </p>
           </div>

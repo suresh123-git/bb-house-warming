@@ -21,21 +21,19 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ currentLang }) => 
           <Home size={18} strokeWidth={1.75} />
         </div>
 
-        {/* Bilingual closing quote */}
-        <p className="font-display text-lg sm:text-xl text-[#482B19] italic max-w-md mb-3">
+        {/* Closing quote */}
+        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-lg sm:text-xl text-[#482B19] italic max-w-md mb-3`}>
           "{content.closingQuote}"
         </p>
 
         {/* Brand & Date */}
-        <p className="font-sans text-xs tracking-widest uppercase font-semibold text-[#684329]/80">
+        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs tracking-widest uppercase font-semibold text-[#684329]/80`}>
           {content.brand} • {content.date}
         </p>
 
-        {/* Subtle Telugu blessing */}
-        <p className="font-telugu text-xs text-[#B86C3C] mt-2">
-          {currentLang === 'te'
-            ? 'మా నూతన గృహప్రవేశ వేడుకకు మీ ఆశీస్సులే మాకు కొండంత బలం.'
-            : 'Gruhapravesam Ceremony • Auspicious Housewarming 2026'}
+        {/* Subnote: House Warming Ceremony • 2026 / గృహప్రవేశ మహోత్సవం • 2026 */}
+        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs text-[#B86C3C] mt-2`}>
+          {content.subnote}
         </p>
       </div>
     </footer>

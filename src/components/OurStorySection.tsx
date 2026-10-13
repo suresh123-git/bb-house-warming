@@ -25,20 +25,20 @@ export const OurStorySection: React.FC<OurStorySectionProps> = ({ currentLang })
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* ================= LEFT COLUMN: STORY EDITORIAL COPY ================= */}
           <div className="lg:col-span-6 flex flex-col justify-center relative">
-            {/* Eyebrow: OUR STORY */}
-            <p className="font-sans text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-4 sm:mb-5">
+            {/* Eyebrow: OUR STORY / మా కథ */}
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-4 sm:mb-5`}>
               {content.eyebrow}
             </p>
 
             {/* Main Heading: A Place to Call Home */}
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal leading-[1.12] tracking-tight mb-6 sm:mb-8">
+            <h2 className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal leading-[1.12] tracking-tight mb-6 sm:mb-8`}>
               {content.titleLine1}
               <br />
               {content.titleLine2}
             </h2>
 
             {/* Warm, meaningful story copy */}
-            <div className="font-sans text-sm sm:text-base text-[#684329]/90 leading-relaxed space-y-4 max-w-lg">
+            <div className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-sm sm:text-base text-[#684329]/90 leading-relaxed space-y-4 max-w-lg`}>
               <p>{content.p1}</p>
               <p>{content.p2}</p>
             </div>

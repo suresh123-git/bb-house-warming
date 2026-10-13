@@ -69,7 +69,9 @@ export const BlessingsSection: React.FC<BlessingsSectionProps> = ({ currentLang 
   // WhatsApp share generator
   const handleShareWhatsApp = () => {
     const pageUrl = window.location.href;
-    const shareText = `🏡 ${couple.groom.firstName} & ${couple.bride.firstName} Gruhapravesam (Housewarming Ceremony) on 16 November 2026.\n\nఆహ్వాన పత్రికను ఇక్కడ చూడండి:\n${pageUrl}`;
+    const shareText = currentLang === 'te'
+      ? `🏡 బికాస్ & భార్గవి గృహప్రవేశ మహోత్సవం (16 నవంబర్ 2026).\n\nఆహ్వాన పత్రికను ఇక్కడ చూడండి:\n${pageUrl}`
+      : `🏡 ${couple.groom.firstName} & ${couple.bride.firstName} House Warming Ceremony on 16 November 2026.\n\nView the invitation card here:\n${pageUrl}`;
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
@@ -77,9 +79,13 @@ export const BlessingsSection: React.FC<BlessingsSectionProps> = ({ currentLang 
   // Add to Google Calendar
   const handleAddToCalendar = () => {
     const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      "Bikas & Bhargavi's Gruhapravesam Ceremony (Housewarming)"
+      currentLang === 'te'
+        ? "బికాస్ & భార్గవి ల గృహప్రవేశ మహోత్సవం"
+        : "Bikas & Bhargavi's House Warming Ceremony"
     )}&dates=20261116T040000Z/20261116T150000Z&details=${encodeURIComponent(
-      "Gruhapravesam ceremony of Bikas Jena & Bhargavi Diddi on 16 November 2026. Welcome to Sri Nilayam!"
+      currentLang === 'te'
+        ? "16 నవంబర్ 2026న బికాస్ జెనా & భార్గవి దిద్ది ల గృహప్రవేశ వేడుక. శ్రీ నిలయానికి స్వాగతం!"
+        : "House Warming ceremony of Bikas Jena & Bhargavi Diddi on 16 November 2026. Welcome to Sri Nilayam!"
     )}&location=${encodeURIComponent(
       `${venue.name[currentLang]}, Andhra Pradesh`
     )}`;

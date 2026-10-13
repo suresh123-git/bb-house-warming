@@ -231,16 +231,19 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               height: '52%',
             }}
           >
-            {/* English Heading matching Panel 1 */}
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              A New
-              <br />
-              Chapter Begins...
+            {/* Dynamic Heading based on active language */}
+            <h1 className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}>
+              {content.heading.split('\n').map((line, idx) => (
+                <React.Fragment key={idx}>
+                  {line}
+                  {idx < content.heading.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))}
             </h1>
 
-            {/* Authentic Telugu Greeting beneath English heading */}
-            <p className="font-telugu text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-              {content.subheadingTe}
+            {/* Dynamic Subheading matching selected language */}
+            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}>
+              {content.subheading}
             </p>
 
             {/* Subtle brass divider with ornament */}
@@ -255,8 +258,10 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               id="open-the-door-btn"
               onClick={handleOpenClick}
               disabled={isAnimating || doorsSwung}
-              className="group cursor-pointer bg-[#F6F1E8] hover:bg-white text-[#482B19] active:scale-95 font-sans font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/50"
-              aria-label="Open the door to enter housewarming invitation"
+              className={`group cursor-pointer bg-[#F6F1E8] hover:bg-white text-[#482B19] active:scale-95 ${
+                currentLang === 'te' ? 'font-telugu' : 'font-sans'
+              } font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/50`}
+              aria-label={currentLang === 'te' ? 'గృహప్రవేశ ఆహ్వానంలోకి ప్రవేశించండి' : 'Open the door to enter house warming invitation'}
             >
               <span>{content.openBtn}</span>
             </button>
