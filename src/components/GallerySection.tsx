@@ -11,8 +11,8 @@ interface GallerySectionProps {
 interface GalleryItem {
   src: string;
   alt: string;
-  title: { te: string; en: string };
-  desc: { te: string; en: string };
+  title: Record<string, string>;
+  desc: Record<string, string>;
 }
 
 export const GallerySection: React.FC<GallerySectionProps> = ({ currentLang }) => {
@@ -106,14 +106,14 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ currentLang }) =
               {/* Hover overlay with housewarming caption */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#2B140B]/90 via-[#2B140B]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-white text-xs">
                 <span className="font-bold font-telugu text-sm text-[#DFB76C]">
-                  {item.title[currentLang]}
+                  {item.title[currentLang] || item.title.en}
                 </span>
                 <span className="text-[11px] font-telugu text-white/90 line-clamp-2 mt-0.5">
-                  {item.desc[currentLang]}
+                  {item.desc[currentLang] || item.desc.en}
                 </span>
                 <div className="flex items-center gap-1 mt-1 text-[10px] text-[#DFB76C]">
                   <ZoomIn className="w-3 h-3" />
-                  <span>{currentLang === 'te' ? 'చూడండి' : 'Enlarge'}</span>
+                  <span>{currentLang === 'kn' ? 'ನೋಡಿ' : currentLang === 'te' ? 'చూడండి' : 'Enlarge'}</span>
                 </div>
               </div>
             </div>
@@ -165,10 +165,10 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ currentLang }) =
 
               <div className="mt-3 px-2 text-center">
                 <h4 className="text-base font-bold text-[#782A15] font-telugu">
-                  {activePhoto.title[currentLang]}
+                  {activePhoto.title[currentLang] || activePhoto.title.en}
                 </h4>
                 <p className="text-xs text-[#542813] font-telugu mt-0.5">
-                  {activePhoto.desc[currentLang]}
+                  {activePhoto.desc[currentLang] || activePhoto.desc.en}
                 </p>
                 <p className="text-[11px] text-[#D49B28] mt-1 font-semibold">
                   శ్రీ నిలయం • గృహప్రవేశం 2026

@@ -1,4 +1,4 @@
-export type Language = 'te' | 'en';
+export type Language = 'en' | 'te' | 'kn';
 
 export interface StoryboardSectionContent {
   entrance: {
@@ -45,7 +45,10 @@ export interface StoryboardSectionContent {
     eyebrow: string;
     title: string;
     subtitle: string;
+    venueName: string;
+    address: string;
     mapBtn: string;
+    mapUrl: string;
     noticeText: string;
     discreetNote: string;
   };
@@ -105,16 +108,20 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       title: 'House Warming',
       dateDay: 'Monday',
       dateFull: '16 November 2026',
-      timeLabel: 'Muhurtham Time',
-      timeValue: 'To be confirmed',
+      timeLabel: 'Lunch Time',
+      timeValue: 'From 12:30 PM',
     },
     location: {
       eyebrow: 'THE LOCATION',
       title: 'Come Home',
       subtitle: 'We would be happy to have you with us at our new home.',
+      venueName: 'SS Serenity',
+      address: 'Sarjapura, Bengaluru',
       mapBtn: 'Open in Google Maps →',
-      noticeText: 'Venue details and live Google Maps directions will be shared personally soon.',
-      discreetNote: 'Address will be shared personally.',
+      mapUrl:
+        'https://www.google.com/maps/place/SS+Serenity+Sarjapura/@12.8642697,77.7840246,17z/data=!4m6!3m5!1s0x3bae72e3e197070b:0x3b66476d8bfb646a!8m2!3d12.8643028!4d77.7863933!16s%2Fg%2F11yg_ffc8s?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D',
+      noticeText: 'Opening SS Serenity in Google Maps...',
+      discreetNote: 'SS Serenity, Sarjapura, Bengaluru',
     },
     invitation: {
       eyebrow: 'OUR INVITATION',
@@ -171,16 +178,20 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       title: 'గృహప్రవేశం',
       dateDay: 'సోమవారం',
       dateFull: '16 నవంబర్ 2026',
-      timeLabel: 'శుభ ముహూర్తం',
-      timeValue: 'త్వరలో తెలియజేయబడును',
+      timeLabel: 'భోజన సమయం',
+      timeValue: 'మధ్యాహ్నం 12:30 నుండి',
     },
     location: {
       eyebrow: 'వేదిక',
       title: 'మా ఇంటికి రండి',
       subtitle: 'మా కొత్త ఇంట్లో మిమ్మల్ని చూడటం మాకెంతో ఆనందం.',
+      venueName: 'ఎస్.ఎస్ సెరెనిటీ',
+      address: 'సర్జాపుర, బెంగళూరు',
       mapBtn: 'గూగుల్ మ్యాప్స్‌లో చూడండి →',
-      noticeText: 'చిరునామా వివరాలు మరియు గూగుల్ మ్యాప్స్ లొకేషన్ త్వరలో వ్యక్తిగతంగా తెలియజేయబడును.',
-      discreetNote: 'చిరునామా వివరాలు త్వరలో వ్యక్తిగతంగా తెలియజేయబడును.',
+      mapUrl:
+        'https://www.google.com/maps/place/SS+Serenity+Sarjapura/@12.8642697,77.7840246,17z/data=!4m6!3m5!1s0x3bae72e3e197070b:0x3b66476d8bfb646a!8m2!3d12.8643028!4d77.7863933!16s%2Fg%2F11yg_ffc8s?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D',
+      noticeText: 'గూగుల్ మ్యాప్స్ మార్గం తెరవబడుతుంది...',
+      discreetNote: 'ఎస్.ఎస్ సెరెనిటీ, సర్జాపుర, బెంగళూరు',
     },
     invitation: {
       eyebrow: 'ఆహ్వానం',
@@ -199,11 +210,82 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       subnote: 'గృహప్రవేశ మహోత్సవం • 2026',
     },
   },
+  kn: {
+    entrance: {
+      heading: 'ಹೊಸ\nಆರಂಭ...',
+      subheading: 'ನಮ್ಮ ಹೊಸ ಮನೆಗೆ ಸುಸ್ವಾಗತ',
+      openBtn: 'ಬಾಗಿಲು ತೆರೆಯಿರಿ →',
+    },
+    nav: {
+      brand: 'ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ',
+      home: 'ಪ್ರಾರಂಭ',
+      ourStory: 'ನಮ್ಮ ಕಥೆ',
+      details: 'ವಿವರಗಳು',
+      location: 'ಸ್ಥಳ',
+      switchLangTooltip: 'ಭಾಷೆ ಬದಲಾಯಿಸಿ',
+      musicPlayTooltip: '',
+      musicMuteTooltip: '',
+      replayTooltip: 'ಪ್ರಾರಂಭವನ್ನು ಮತ್ತೆ ವೀಕ್ಷಿಸಿ',
+    },
+    hero: {
+      eyebrow: 'ನಮ್ಮ ಗೃಹಪ್ರವೇಶ',
+      titleLine1: 'ಪ್ರೀತಿಯಿಂದ ತುಂಬಿದ',
+      titleLine2: 'ನಮ್ಮ ಮನೆ',
+      subtitleLine1: 'ನಮ್ಮ ಹೊಸ ಮನೆಯ ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವಕ್ಕೆ',
+      subtitleLine2: 'ನಿಮ್ಮನ್ನು ಮತ್ತು ನಿಮ್ಮ ಕುಟುಂಬವನ್ನು ಪ್ರೀತಿಯಿಂದ ಆಹ್ವಾನಿಸುತ್ತಿದ್ದೇವೆ',
+      secondarySubtitle: 'ನಮ್ಮ ಈ ನೂತನ ಪಯಣದಲ್ಲಿ ನಿಮ್ಮ ಆಶೀರ್ವಾದ ಸದಾ ಇರಲಿ ಎಂದು ಬಯಸುತ್ತೇವೆ.',
+      date: 'ಸೋಮವಾರ, 16 ನವೆಂಬರ್ 2026',
+    },
+    story: {
+      eyebrow: 'ನಮ್ಮ ಕಥೆ',
+      titleLine1: 'ಕನಸಿನ ಗೂಡು',
+      titleLine2: 'ನಮ್ಮ ಮನೆ',
+      p1: 'ಪ್ರತಿಯೊಂದು ಮನೆಗೂ ಒಂದು ಸುಂದರ ಕಥೆ ಇರುತ್ತದೆ. ನಮ್ಮ ಮನೆ ಕನಸುಗಳು, ಹಿರಿಯರ ಆಶೀರ್ವಾದ ಮತ್ತು ಕುಟುಂಬ ಹಾಗೂ ಸ್ನೇಹಿತರ ಪ್ರೀತಿಯಿಂದ ನಿರ್ಮಾಣವಾಗಿದೆ.',
+      p2: 'ನಮ್ಮ ಜೀವನದ ಈ ಪವಿತ್ರ ಕ್ಷಣದಲ್ಲಿ ನೀವು ಭಾಗಿಯಾಗಿ ನಮಗೆ ಶುಭ ಹಾರೈಸಬೇಕಾಗಿ ಪ್ರೀತಿಯಿಂದ ವಿನಂತಿಸುತ್ತೇವೆ.',
+    },
+    details: {
+      eyebrow: 'ಶುಭ ಸಮಾರಂಭ',
+      title: 'ಗೃಹಪ್ರವೇಶ',
+      dateDay: 'ಸೋಮವಾರ',
+      dateFull: '16 ನವೆಂಬರ್ 2026',
+      timeLabel: 'ಊಟದ ಸಮಯ',
+      timeValue: 'ಮಧ್ಯಾಹ್ನ 12:30 ರಿಂದ',
+    },
+    location: {
+      eyebrow: 'ಸ್ಥಳ',
+      title: 'ನಮ್ಮ ಮನೆಗೆ ಬನ್ನಿ',
+      subtitle: 'ನಮ್ಮ ಹೊಸ ಮನೆಯಲ್ಲಿ ನಿಮ್ಮನ್ನು ಸ್ವಾಗತಿಸಲು ನಾವು ಕಾತರರಾಗಿದ್ದೇವೆ.',
+      venueName: 'ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ',
+      address: 'ಸರ್ಜಾಪುರ, ಬೆಂಗಳೂರು',
+      mapBtn: 'ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ನೋಡಿ →',
+      mapUrl:
+        'https://www.google.com/maps/place/SS+Serenity+Sarjapura/@12.8642697,77.7840246,17z/data=!4m6!3m5!1s0x3bae72e3e197070b:0x3b66476d8bfb646a!8m2!3d12.8643028!4d77.7863933!16s%2Fg%2F11yg_ffc8s?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D',
+      noticeText: 'ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ ತೆರೆಯಲಾಗುತ್ತಿದೆ...',
+      discreetNote: 'ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ, ಸರ್ಜಾಪುರ, ಬೆಂಗಳೂರು',
+    },
+    invitation: {
+      eyebrow: 'ಆಹ್ವಾನ',
+      title: 'ನಿಮಗೆ ಆದರದ ಸುಸ್ವಾಗತ',
+      quoteLine1: 'ನಮ್ಮ ಗೃಹಪ್ರವೇಶಕ್ಕೆ',
+      quoteLine2: 'ನಿಮ್ಮ ಆಗಮನವೇ ನಮಗೆ ಸಂತೋಷ',
+      message:
+        'ನಮ್ಮ ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವದಲ್ಲಿ ಪಾಲ್ಗೊಂಡು, ನಮ್ಮ ನೂತನ ಗೃಹಸ್ಥ ಜೀವನಕ್ಕೆ ನಿಮ್ಮ ಅಮೂಲ್ಯ ಆಶೀರ್ವಾದಗಳನ್ನು ನೀಡಬೇಕಾಗಿ ಹೃತ್ಪೂರ್ವಕವಾಗಿ ಪ್ರಾರ್ಥಿಸುತ್ತೇವೆ.',
+      signOff: 'ಪ್ರೀತಿಯಿಂದ,',
+      coupleNames: 'ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ',
+    },
+    footer: {
+      closingQuote: 'ನಮ್ಮ ನೂತನ ಮನೆ ಸದಾ ಪ್ರೀತಿ, ಶಾಂತಿ ಮತ್ತು ಸಮೃದ್ಧಿಯಿಂದ ಕೂಡಿರಲಿ.',
+      brand: 'ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ',
+      date: '16 ನವೆಂಬರ್ 2026',
+      subnote: 'ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವ • 2026',
+    },
+  },
 };
 
 export interface BilingualText {
   te: string;
   en: string;
+  kn?: string;
 }
 
 export interface HouseFeature {
@@ -328,40 +410,52 @@ export const invitationData: InvitationData = {
   },
 
   venue: {
-    isConfirmed: false,
+    isConfirmed: true,
     name: {
-      te: 'శ్రీ నిలయం (నూతన గృహం)',
-      en: 'Sri Nilayam (Our New Home)',
+      te: 'ఎస్.ఎస్ సెరెనిటీ (మా కొత్త ఇల్లు)',
+      en: 'SS Serenity (Our New Home)',
+      kn: 'ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ (ನಮ್ಮ ಹೊಸ ಮನೆ)',
     },
     addressLine1: {
-      te: 'వేదిక చిరునామా కుటుంబ పెద్దలచే త్వరలో తెలియజేయబడును',
-      en: 'Exact venue address to be shared upon family confirmation',
+      te: 'ఎస్.ఎస్ సెరెనిటీ, సర్జాపుర',
+      en: 'SS Serenity, Sarjapura',
+      kn: 'ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ, ಸರ್ಜಾಪುರ',
     },
     addressLine2: {
-      te: 'రాజమండ్రి / విశాఖపట్నం పరిసర ప్రాంతం',
-      en: 'Rajahmundry / Visakhapatnam region',
+      te: 'బెంగళూరు',
+      en: 'Bengaluru, Karnataka',
+      kn: 'ಬೆಂಗಳೂರು, ಕರ್ನಾಟಕ',
     },
     city: {
-      te: 'ఆంధ్రప్రదేశ్',
-      en: 'Andhra Pradesh',
+      te: 'బెంగళూరు, కర్ణాటక',
+      en: 'Bengaluru, Karnataka',
+      kn: 'ಬೆಂಗಳೂರು, ಕರ್ನಾಟಕ',
     },
     landmark: {
-      te: 'గూగుల్ మ్యాప్స్ లొకేషన్ వివరాలు త్వరలోనే అందించబడును',
-      en: 'Google Maps pin & landmarks will be updated soon',
+      te: 'ఎస్.ఎస్ సెరెనిటీ, సర్జాపుర',
+      en: 'SS Serenity, Sarjapura',
+      kn: 'ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ, ಸರ್ಜಾಪುರ',
     },
-    googleMapsUrl: null,
+    googleMapsUrl:
+      'https://www.google.com/maps/place/SS+Serenity+Sarjapura/@12.8642697,77.7840246,17z/data=!4m6!3m5!1s0x3bae72e3e197070b:0x3b66476d8bfb646a!8m2!3d12.8643028!4d77.7863933!16s%2Fg%2F11yg_ffc8s?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D',
   },
 
   meal: {
-    isConfirmed: false,
+    isConfirmed: true,
     title: {
-      te: 'గృహప్రవేశ విందు & తీర్థ ప్రసాదాలు',
-      en: 'Housewarming Feast & Prasadam',
+      te: 'విందు భోజనం',
+      en: 'Celebratory Lunch',
+      kn: 'ವಿಶೇಷ ಭೋಜನ',
     },
-    timing: null,
+    timing: {
+      te: 'మధ్యాహ్నం 12:30 నుండి',
+      en: 'From 12:30 PM',
+      kn: 'ಮಧ್ಯಾಹ್ನ 12:30 ರಿಂದ',
+    },
     description: {
-      te: 'పూజా కార్యక్రమాల అనంతరం ఆత్మీయ బంధుమిత్రులకు సాంప్రదాయ విందు భోజనం.',
-      en: 'Traditional celebratory feast and prasadam following the sacred pooja.',
+      te: 'ఆత్మీయ బంధుమిత్రులకు సాంప్రదాయ విందు భోజనం.',
+      en: 'Traditional celebratory lunch with family and friends.',
+      kn: 'ಆತ್ಮೀಯ ಬಂಧು-ಮಿತ್ರರಿಗೆ ವಿಶೇಷ ಭೋಜನ.',
     },
   },
 
@@ -615,10 +709,10 @@ export const uiContent = {
     rituals: {
       tag: 'గృహప్రవేశ పవిత్ర విధువులు',
       title: 'నాలుగు సాంప్రదాయ శుభ కార్యక్రమాలు',
-      subtitle: 'శాస్త్రోక్తంగా నిర్వహించబడు పూజలు & ముహూర్త వివరాలు',
+      subtitle: 'శాస్త్రోక్తంగా నిర్వహించబడు పూజలు & భోజన వివరాలు',
       dateBadge: '16 నవంబర్ 2026 (ఖరారైన తేదీ)',
-      timePendingNote: 'పురోహితుల ద్వారా ముహూర్త నిర్ణయం జరుగుతున్నది. సమయం త్వరలో నవీకరించబడును.',
-      timePendingBadge: 'సమయం త్వరలో...',
+      timePendingNote: 'మధ్యాహ్నం 12:30 నుండి విందు భోజనం ప్రారంభం.',
+      timePendingBadge: 'భోజనం: 12:30 PM',
       significanceLabel: 'శాస్త్ర ప్రాముఖ్యత:',
     },
     features: {
@@ -634,10 +728,10 @@ export const uiContent = {
     venue: {
       tag: 'గృహ వేదిక & మార్గం',
       title: 'మా ఇంటికి ఎలా చేరుకోవాలి?',
-      subtitle: 'శ్రీ నిలయం — మా సరికొత్త చిరునామా',
-      statusNotice: 'కుటుంబ సభ్యుల నుండి ఖచ్చితమైన చిరునామా & గూగుల్ మ్యాప్స్ లొకేషన్ వివరాలు త్వరలోనే ఇక్కడ నవీకరించబడతాయి.',
-      statusBadge: 'చిరునామా ఖరారు కావలసి ఉంది',
-      directionsPending: 'మ్యాప్ వివరాలు త్వరలో రానున్నాయి',
+      subtitle: 'ఎస్.ఎస్ సెరెనిటీ, సర్జాపుర — మా సరికొత్త చిరునామా',
+      statusNotice: 'వేదిక: ఎస్.ఎస్ సెరెనిటీ, సర్జాపుర. గూగుల్ మ్యాప్స్ ద్వారా మార్గాన్ని చూడవచ్చు.',
+      statusBadge: 'వేదిక ఖరారైనది',
+      directionsPending: 'గూగుల్ మ్యాప్స్‌లో చూడండి',
       copyBtn: 'చిరునామా కాపీ చేయండి',
       copiedBtn: 'కాపీ చేయబడింది!',
     },
@@ -710,8 +804,8 @@ export const uiContent = {
       title: 'The Four Pillars of Our Housewarming',
       subtitle: 'Traditional Telugu rituals consecrating our threshold and hearth',
       dateBadge: '16 November 2026 (Confirmed Date)',
-      timePendingNote: 'Exact auspicious muhurtham time is currently being formalized by family priests. Will be updated shortly.',
-      timePendingBadge: 'Timing to be announced...',
+      timePendingNote: 'Lunch will be served from 12:30 PM onwards.',
+      timePendingBadge: 'Lunch: From 12:30 PM',
       significanceLabel: 'Sacred Significance:',
     },
     features: {
@@ -727,10 +821,10 @@ export const uiContent = {
     venue: {
       tag: 'Venue & Directions',
       title: 'Finding Your Way to Our Doorstep',
-      subtitle: 'Sri Nilayam — Our New Abode',
-      statusNotice: 'Exact venue address and Google Maps directions will be updated here as soon as family arrangements are finalized.',
-      statusBadge: 'Address to be announced',
-      directionsPending: 'Directions coming soon',
+      subtitle: 'SS Serenity, Sarjapura — Our New Abode',
+      statusNotice: 'SS Serenity, Sarjapura. Open in Google Maps for live directions.',
+      statusBadge: 'Venue Confirmed',
+      directionsPending: 'Open in Google Maps',
       copyBtn: 'Copy Address',
       copiedBtn: 'Address Copied!',
     },
@@ -748,6 +842,99 @@ export const uiContent = {
     footer: {
       tagline: 'Sri Nilayam • House Warming Ceremony 2026',
       builtNote: 'Crafted with authentic South Indian House Warming traditions',
+    },
+  },
+
+  kn: {
+    omGanesh: '॥ ಶ್ರೀ ಗಣೇಶಾಯ ನಮಃ • ವಾಸ್ತು ದೇವತಾಯ ನಮಃ ॥',
+    subInvocation: 'ನಮ್ಮ ನೂತನ ಗೃಹವು ಶಾಂತಿ, ಸಮೃದ್ಧಿ ಮತ್ತು ಸುಖ-ಸಂತೋಷಗಳಿಂದ ಕೂಡಿರಲಿ',
+    doorScreen: {
+      tag: 'ಸಿಂಹದ್ವಾರ • ಶುಭ ಪ್ರವೇಶ',
+      mainHeading: 'ನಮ್ಮ ಹೊಸ ಮನೆಗೆ ಸುಸ್ವಾಗತ',
+      subHeading: 'ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ ಅವರ ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವ',
+      dateText: 'ಸೋಮವಾರ, 16 ನವೆಂಬರ್ 2026',
+      instruction: 'ಸಿಂಹದ್ವಾರ ತೆರೆದು ಹೊಸ ಮನೆಗೆ ಪ್ರವೇಶಿಸಿ',
+      enterBtn: 'ಸಿಂಹದ್ವಾರ ತೆರೆಯಿರಿ 🔔',
+      openedStatus: 'ನಮ್ಮ ಹೊಸ ಮನೆಗೆ ಆದರದ ಸುಸ್ವಾಗತ!',
+    },
+    nav: {
+      entrance: 'ಸಿಂಹದ್ವಾರ',
+      abode: 'ನಮ್ಮ ಮನೆ',
+      rituals: 'ಪೂಜಾ ವಿಧಿಗಳು',
+      invitation: 'ಆಹ್ವಾನ',
+      features: 'ಮನೆಯ ಮುಖ್ಯಾಂಶಗಳು',
+      journey: 'ನಮ್ಮ ಪಯಣ',
+      venue: 'ಸ್ಥಳ',
+      blessings: 'ಆಶೀರ್ವಾದ',
+    },
+    hero: {
+      eyebrow: 'ಶುಭ ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವ',
+      title: 'ನಮ್ಮ ಗೃಹಪ್ರವೇಶ',
+      subtitle: 'ಪ್ರೀತಿ, ಕನಸು ಮತ್ತು ಹಿರಿಯರ ಆಶೀರ್ವಾದದಿಂದ ನಿರ್ಮಾಣವಾದ ನಮ್ಮ ಮನೆಗೆ ಸುಸ್ವಾಗತ.',
+      homeownersBadge: 'ನೂತನ ಗೃಹಸ್ಥರು: ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ',
+      dateLabel: 'ಗೃಹಪ್ರವೇಶ ದಿನಾಂಕ',
+      countdownTitle: 'ಗೃಹಪ್ರವೇಶಕ್ಕೆ ಇನ್ನುಳಿದ ಸಮಯ',
+      days: 'ದಿನಗಳು',
+      hours: 'ಗಂಟೆಗಳು',
+      mins: 'ನಿಮಿಷಗಳು',
+      secs: 'ಸೆಕೆಂಡುಗಳು',
+      eventPassed: 'ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವ ಆರಂಭವಾಗಿದೆ!',
+    },
+    invitation: {
+      tag: 'ಆದರದ ಆಹ್ವಾನ',
+      title: 'ನಮ್ಮ ಹೊಸ ಮನೆಗೆ ನಿಮ್ಮನ್ನು ಸ್ವಾಗತಿಸುತ್ತಿದ್ದೇವೆ',
+      subtitle: 'ನಿಮ್ಮ ಪಾದಸ್ಪರ್ಶದಿಂದ ನಮ್ಮ ಹೊಸ ಮನೆ ಪಾವನವಾಗಲಿ',
+      salutation: 'ಆತ್ಮೀಯ ಬಂಧು-ಮಿತ್ರರೇ ಮತ್ತು ಹಿರಿಯರೇ,',
+      p1: 'ದೇವರ ಕೃಪೆ ಮತ್ತು ಹಿರಿಯರ ಆಶೀರ್ವಾದದಿಂದ ನಮ್ಮ ಕನಸಿನ ಮನೆ ನನಸಾಗಿದೆ. ನಮ್ಮ ಗೃಹಪ್ರವೇಶ ಸಮಾರಂಭಕ್ಕೆ ನಿಮ್ಮನ್ನು ಮತ್ತು ನಿಮ್ಮ ಕುಟುಂಬವನ್ನು ಪ್ರೀತಿಯಿಂದ ಆಹ್ವಾನಿಸುತ್ತಿದ್ದೇವೆ.',
+      p2: 'ನಾವು ಈ ಹೊಸ ಮನೆಯ ಹೊಸ್ತಿಲನ್ನು ದಾಟಿ ಹೊಸ ಜೀವನ ಆರಂಭಿಸುವಾಗ ನಿಮ್ಮ ಅಮೂಲ್ಯ ಆಶೀರ್ವಾದ ನಮಗೆ ಶ್ರೀರಕ್ಷೆಯಾಗಿರಲಿ.',
+      shloka: '॥ ಶುಭಂ ಭವತು • ಕಲ್ಯಾಣಂ ಆಯುರಾರೋಗ್ಯ ಸಂಪದಃ ॥',
+      shlokaMeaning: 'ಈ ಮನೆಯು ಸದಾ ಶಾಂತಿ, ನೆಮ್ಮದಿ ಮತ್ತು ಸಮೃದ್ಧಿಯಿಂದ ಬೆಳಗಲಿ!',
+      hostedBy: 'ನೂತನ ಗೃಹಸ್ಥರು',
+      familyGreeting: 'ಜೇನಾ ಮತ್ತು ದಿದ್ದಿ ಕುಟುಂಬ ವರ್ಗ',
+    },
+    rituals: {
+      tag: 'ಪವಿತ್ರ ಗೃಹಪ್ರವೇಶ ವಿಧಿಗಳು',
+      title: 'ಗೃಹಪ್ರವೇಶದ ಪ್ರಮುಖ ಆಚರಣೆಗಳು',
+      subtitle: 'ಸಾಂಪ್ರದಾಯಿಕ ಪೂಜೆ ಮತ್ತು ಹೋಮ-ಹವನಗಳು',
+      dateBadge: '16 ನವೆಂಬರ್ 2026',
+      timePendingNote: 'ಮಧ್ಯಾಹ್ನ 12:30 ರಿಂದ ಭೋಜನದ ವ್ಯವಸ್ಥೆ ಮಾಡಲಾಗಿದೆ.',
+      timePendingBadge: 'ಊಟ: 12:30 PM',
+      significanceLabel: 'ಧಾರ್ಮಿಕ ಮಹತ್ವ:',
+    },
+    features: {
+      tag: 'ಮನೆಯ ಪರಿಚಯ',
+      title: 'ನಮ್ಮ ಹೊಸ ಮನೆಯ ಮುಖ್ಯಾಂಶಗಳು',
+      subtitle: 'ಸಾಂಪ್ರದಾಯಿಕ ಮತ್ತು ಆಧುನಿಕತೆಯ ಸುಂದರ ಸಂಗಮ',
+    },
+    journey: {
+      tag: 'ನಮ್ಮ ಪಯಣ',
+      title: 'ಕನಸಿನಿಂದ ನನಸಿನವರೆಗೆ',
+      subtitle: 'ನಮ್ಮ ಮನೆ ನಿರ್ಮಾಣವಾದ ಸುಂದರ ಹಂತಗಳು',
+    },
+    venue: {
+      tag: 'ಸ್ಥಳ ಮತ್ತು ಮಾರ್ಗ',
+      title: 'ನಮ್ಮ ಮನೆಯ ವಿಳಾಸ',
+      subtitle: 'ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ, ಸರ್ಜಾಪುರ — ನಮ್ಮ ಹೊಸ ನೆಲೆ',
+      statusNotice: 'ಸ್ಥಳ: ಎಸ್.ಎಸ್ ಸೆರೆನಿಟಿ, ಸರ್ಜಾಪುರ. ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್ ಮೂಲಕ ಮಾರ್ಗ ವೀಕ್ಷಿಸಿ.',
+      statusBadge: 'ಸ್ಥಳ ಖಚಿತವಾಗಿದೆ',
+      directionsPending: 'ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ನೋಡಿ',
+      copyBtn: 'ವಿಳಾಸ ನಕಲಿಸಿ',
+      copiedBtn: 'ನಕಲಿಸಲಾಗಿದೆ!',
+    },
+    blessings: {
+      tag: 'ಶುಭ ಹಾರೈಕೆಗಳು',
+      title: 'ನಿಮ್ಮ ಹಾರೈಕೆ ಮತ್ತು ಆಶೀರ್ವಾದವಿರಲಿ',
+      subtitle: 'ನಿಮ್ಮ ಪ್ರೀತಿ ಮತ್ತು ಆಶೀರ್ವಾದ ನಮ್ಮ ಜೀವನಕ್ಕೆ ಶ್ರೀರಕ್ಷೆ',
+      showerBtn: 'ಅಕ್ಷತೆ ಮತ್ತು ಪುಷ್ಪವೃಷ್ಟಿ ಸುರಿಸಿ 🌸',
+      bellRingBtn: 'ಗಂಟೆ ಬಾರಿಸಿ 🔔',
+      shareWhatsApp: 'ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ',
+      addToCalendar: 'ಕ್ಯಾಲೆಂಡರ್‌ನಲ್ಲಿ ಸೇರಿಸಿ',
+      thankYou: 'ನಮ್ಮ ಗೃಹಪ್ರವೇಶಕ್ಕೆ ನಿಮ್ಮ ಶುಭ ಹಾರೈಕೆಗಳಿಗೆ ಹೃತ್ಪೂರ್ವಕ ಧನ್ಯವಾದಗಳು.',
+      signature: 'ಪ್ರೀತಿಯಿಂದ — ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ',
+    },
+    footer: {
+      tagline: 'ಶ್ರೀ ನಿಲಯ • ಗೃಹಪ್ರವೇಶ ಸಮಾರಂಭ 2026',
+      builtNote: 'ಸಾಂಪ್ರದಾಯಿಕ ದಕ್ಷಿಣ ಭಾರತೀಯ ಸಂಸ್ಕೃತಿಯೊಂದಿಗೆ ರೂಪಿಸಲಾಗಿದೆ',
     },
   },
 };

@@ -49,29 +49,6 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
     if (isAnimating || doorsSwung) return;
     setIsAnimating(true);
 
-    // Auspicious bell / chime audio synthesis fallback
-    try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (AudioCtx) {
-        const ctx = new AudioCtx();
-        // Temple chime harmonic tones (E5 + B5 + E6)
-        [659.25, 987.77, 1318.51].forEach((freq, i) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, ctx.currentTime);
-          gain.gain.setValueAtTime(0.25 / (i + 1), ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.2);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(ctx.currentTime + i * 0.08);
-          osc.stop(ctx.currentTime + 2.5);
-        });
-      }
-    } catch {
-      // Audio fallback silent
-    }
-
     // Trigger door swing inward after brief text fade
     setTimeout(() => {
       setDoorsSwung(true);
@@ -232,7 +209,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
             }}
           >
             {/* Dynamic Heading based on active language */}
-            <h1 className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}>
+            <h1 className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-display'} text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}>
               {content.heading.split('\n').map((line, idx) => (
                 <React.Fragment key={idx}>
                   {line}
@@ -242,7 +219,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
             </h1>
 
             {/* Dynamic Subheading matching selected language */}
-            <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}>
+            <p className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}>
               {content.subheading}
             </p>
 
@@ -259,9 +236,15 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               onClick={handleOpenClick}
               disabled={isAnimating || doorsSwung}
               className={`group cursor-pointer bg-[#F6F1E8] hover:bg-white text-[#482B19] active:scale-95 ${
-                currentLang === 'te' ? 'font-telugu' : 'font-sans'
+                currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'
               } font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/50`}
-              aria-label={currentLang === 'te' ? 'గృహప్రవేశ ఆహ్వానంలోకి ప్రవేశించండి' : 'Open the door to enter house warming invitation'}
+              aria-label={
+                currentLang === 'kn'
+                  ? 'ಗೃಹಪ್ರವೇಶ ಆಹ್ವಾನವನ್ನು ವೀಕ್ಷಿಸಲು ಬಾಗಿಲು ತೆರೆಯಿರಿ'
+                  : currentLang === 'te'
+                  ? 'గృహప్రవేశ ఆహ్వానంలోకి ప్రవేశించండి'
+                  : 'Open the door to enter house warming invitation'
+              }
             >
               <span>{content.openBtn}</span>
             </button>

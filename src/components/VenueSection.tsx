@@ -89,14 +89,26 @@ export const VenueSection: React.FC<VenueSectionProps> = ({ currentLang }) => {
 
             {/* Actions */}
             <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                disabled
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E8D8BF] text-[#7A6153] font-medium text-xs sm:text-sm cursor-not-allowed border border-[#DFB76C]/40"
-              >
-                <Navigation className="w-4 h-4 text-[#7A6153]" />
-                <span className="font-telugu">{content.venue.directionsPending}</span>
-              </button>
+              {venue.googleMapsUrl ? (
+                <a
+                  href={venue.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#B86C3C] hover:bg-[#A35D32] text-white font-medium text-xs sm:text-sm shadow-[0_4px_16px_rgba(184,108,60,0.3)] transition-all"
+                >
+                  <Navigation className="w-4 h-4 text-white" />
+                  <span className={currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'}>{content.venue.directionsPending}</span>
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E8D8BF] text-[#7A6153] font-medium text-xs sm:text-sm cursor-not-allowed border border-[#DFB76C]/40"
+                >
+                  <Navigation className="w-4 h-4 text-[#7A6153]" />
+                  <span className="font-telugu">{content.venue.directionsPending}</span>
+                </button>
+              )}
 
               <button
                 type="button"

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MapPin, Check } from 'lucide-react';
+import React from 'react';
+import { MapPin } from 'lucide-react';
 import type { Language } from '../data/invitation';
 import { storyboardContent } from '../data/invitation';
 import { BotanicalSprig } from './Decorations';
@@ -10,14 +10,6 @@ interface LocationSectionProps {
 
 export const LocationSection: React.FC<LocationSectionProps> = ({ currentLang }) => {
   const content = storyboardContent[currentLang].location;
-  const [showNotice, setShowNotice] = useState(false);
-
-  const handleMapClick = () => {
-    setShowNotice(true);
-    setTimeout(() => {
-      setShowNotice(false);
-    }, 4500);
-  };
 
   return (
     <section
@@ -31,18 +23,18 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ currentLang })
       </div>
 
       <div className="max-w-4xl mx-auto px-6 sm:px-10 flex flex-col items-center text-center">
-        {/* Eyebrow: THE LOCATION / వేదిక */}
-        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-3`}>
+        {/* Eyebrow: THE LOCATION / వేదిక / ಸ್ಥಳ */}
+        <p className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-[13px] font-semibold tracking-[0.25em] text-[#B86C3C] uppercase mb-3`}>
           {content.eyebrow}
         </p>
 
         {/* Title: Come Home */}
-        <h2 className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal tracking-tight mb-3`}>
+        <h2 className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-display'} text-4xl sm:text-5xl lg:text-[56px] text-[#482B19] font-normal tracking-tight mb-3`}>
           {content.title}
         </h2>
 
         {/* Subtitle */}
-        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm text-[#684329]/85 max-w-sm mb-8 sm:mb-10`}>
+        <p className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm text-[#684329]/85 max-w-sm mb-8 sm:mb-10`}>
           {content.subtitle}
         </p>
 
@@ -75,31 +67,33 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ currentLang })
           </svg>
 
           {/* Terracotta Pin */}
-          <div className="relative z-10 w-12 h-12 rounded-full bg-[#B86C3C]/10 flex items-center justify-center text-[#B86C3C] mb-5 shadow-xs">
+          <div className="relative z-10 w-12 h-12 rounded-full bg-[#B86C3C]/10 flex items-center justify-center text-[#B86C3C] mb-3 shadow-xs">
             <MapPin size={28} className="fill-[#B86C3C] text-white" />
           </div>
 
+          {/* Venue & Location Name */}
+          <h3 className={`relative z-10 text-base sm:text-lg font-semibold text-[#482B19] mb-1 ${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'}`}>
+            {content.venueName}
+          </h3>
+          <p className={`relative z-10 text-xs sm:text-[13px] text-[#684329]/80 mb-5 ${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'}`}>
+            {content.address}
+          </p>
+
           {/* Button: Open in Google Maps → */}
-          <button
-            onClick={handleMapClick}
+          <a
+            href={content.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`relative z-10 cursor-pointer bg-[#B86C3C] hover:bg-[#A35D32] active:scale-95 text-white ${
-              currentLang === 'te' ? 'font-telugu' : 'font-sans'
+              currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'
             } text-xs sm:text-sm font-medium tracking-wide px-7 py-2.5 rounded-full shadow-[0_4px_16px_rgba(184,108,60,0.3)] transition-all duration-300 flex items-center gap-2`}
           >
             <span>{content.mapBtn}</span>
-          </button>
+          </a>
         </div>
 
-        {/* Feedback notification when clicked */}
-        {showNotice && (
-          <div className="mt-4 px-4 py-2.5 rounded-lg bg-[#F9F6EF] border border-[#B59A66]/50 text-[#482B19] text-xs flex items-center gap-2 shadow-sm animate-fade-in">
-            <Check size={14} className="text-[#B86C3C] shrink-0" />
-            <span className={currentLang === 'te' ? 'font-telugu' : 'font-sans'}>{content.noticeText}</span>
-          </div>
-        )}
-
         {/* Discreet address note */}
-        <p className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs text-[#684329]/80 italic mt-4`}>
+        <p className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs text-[#684329]/80 italic mt-4`}>
           {content.discreetNote}
         </p>
 

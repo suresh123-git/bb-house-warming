@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Language } from './data/invitation';
 import { OpeningScreen } from './components/OpeningScreen';
 import { Navbar } from './components/Navbar';
@@ -13,53 +13,23 @@ export const App: React.FC = () => {
   // English is default across the entire application as requested
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [isDoorOpen, setIsDoorOpen] = useState<boolean>(false);
-  const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     document.documentElement.lang = currentLang;
     document.title =
-      currentLang === 'te'
+      currentLang === 'kn'
+        ? 'ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ | ಗೃಹಪ್ರವೇಶ ಆಹ್ವಾನ ಪತ್ರಿಕೆ'
+        : currentLang === 'te'
         ? 'బికాస్ & భార్గవి | గృహప్రవేశ ఆహ్వాన పత్రిక'
         : 'Bikas & Bhargavi | House Warming Invitation';
   }, [currentLang]);
 
   const handleOpenDoor = () => {
     setIsDoorOpen(true);
-    if (audioRef.current) {
-      audioRef.current.volume = 0.3;
-      audioRef.current
-        .play()
-        .then(() => setIsPlayingAudio(true))
-        .catch(() => setIsPlayingAudio(false));
-    }
-  };
-
-  const handleToggleAudio = () => {
-    if (!audioRef.current) return;
-
-    if (isPlayingAudio) {
-      audioRef.current.pause();
-      setIsPlayingAudio(false);
-    } else {
-      audioRef.current.volume = 0.3;
-      audioRef.current
-        .play()
-        .then(() => setIsPlayingAudio(true))
-        .catch(() => setIsPlayingAudio(false));
-    }
   };
 
   return (
     <div className="min-h-screen bg-[#F9F6EF] flex flex-col text-[#482B19] relative selection:bg-[#B59A66]/30 selection:text-[#482B19]">
-      {/* Background traditional flute audio */}
-      <audio
-        ref={audioRef}
-        src="/assets/audio/traditional-flute.mp3"
-        loop
-        preload="auto"
-      />
-
       {/* Screen 1 & 2: Fullscreen Entrance & Interactive 3D Door Swing Animation */}
       <OpeningScreen
         currentLang={currentLang}
@@ -73,8 +43,6 @@ export const App: React.FC = () => {
         <Navbar
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          isPlayingAudio={isPlayingAudio}
-          onToggleAudio={handleToggleAudio}
           onReopenDoor={() => setIsDoorOpen(false)}
         />
 

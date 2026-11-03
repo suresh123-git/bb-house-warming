@@ -12,6 +12,8 @@
 
   --font-telugu-serif: 'Noto Serif Telugu', Georgia, serif;
   --font-telugu-sans: 'Noto Sans Telugu', system-ui, sans-serif;
+  --font-kannada-serif: 'Noto Serif Kannada', Georgia, serif;
+  --font-kannada-sans: 'Noto Sans Kannada', system-ui, sans-serif;
   --font-en-serif: 'Cormorant Garamond', Georgia, serif;
   --font-en-sans: 'Inter', system-ui, sans-serif;
   --font-signature: 'Great Vibes', cursive;
@@ -31,6 +33,14 @@
 
 .font-telugu-sans {
   font-family: var(--font-telugu-sans);
+}
+
+.font-kannada {
+  font-family: var(--font-kannada-serif);
+}
+
+.font-kannada-sans {
+  font-family: var(--font-kannada-sans);
 }
 
 .font-serif-en {

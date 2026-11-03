@@ -74,7 +74,9 @@ export const CeremonySection: React.FC<CeremonySectionProps> = ({ currentLang })
           <div className="mt-4 pt-3 border-t border-[#DFB76C]/40 flex items-start gap-2.5 text-xs sm:text-sm text-[#542813] bg-white/70 p-3 rounded-xl">
             <Clock className="w-4 h-4 text-[#D49B28] shrink-0 mt-0.5" />
             <p className="font-telugu leading-relaxed">
-              <strong className="text-[#782A15]">ముహూర్తం: </strong>
+              <strong className="text-[#782A15]">
+                {currentLang === 'kn' ? 'ಊಟದ ಸಮಯ: ' : currentLang === 'te' ? 'భోజన సమయం: ' : 'Lunch Time: '}
+              </strong>
               {content.rituals.timePendingNote}
             </p>
           </div>

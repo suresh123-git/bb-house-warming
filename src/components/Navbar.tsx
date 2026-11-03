@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 import type { Language } from '../data/invitation';
 import { storyboardContent } from '../data/invitation';
 
 interface NavbarProps {
   currentLang: Language;
   onLanguageChange: (lang: Language) => void;
-  isPlayingAudio: boolean;
-  onToggleAudio: () => void;
   onReopenDoor: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentLang,
   onLanguageChange,
-  isPlayingAudio,
-  onToggleAudio,
   onReopenDoor,
 }) => {
   const content = storyboardContent[currentLang].nav;
@@ -53,15 +49,21 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  const getFontClass = () => {
+    if (currentLang === 'kn') return 'font-kannada';
+    if (currentLang === 'te') return 'font-telugu';
+    return 'font-sans';
+  };
+
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
           ? 'bg-[#F9F6EF]/95 backdrop-blur-md shadow-xs py-3.5 border-b border-[#EBDDC8]'
-          : 'bg-[#F9F6EF] py-5 border-b border-transparent'
+          : 'bg-[#F9F6EF] py-4 sm:py-5 border-b border-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-10 flex flex-wrap items-center justify-between gap-y-3">
         {/* Couple Brand Name matching Panel 3 */}
         <a
           href="#home"
@@ -69,16 +71,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             e.preventDefault();
             scrollToSection('home');
           }}
-          className={`${currentLang === 'te' ? 'font-telugu' : 'font-display'} text-2xl sm:text-3xl text-[#482B19] font-medium tracking-tight hover:opacity-90 transition-opacity`}
+          className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-display'} text-2xl sm:text-3xl text-[#482B19] font-medium tracking-tight hover:opacity-90 transition-opacity`}
         >
           {content.brand}
         </a>
 
         {/* Center / Right Editorial Navigation Links */}
-        <nav className="flex items-center gap-6 sm:gap-9">
+        <nav className="flex items-center gap-4 sm:gap-7 md:gap-9">
           <button
             onClick={() => scrollToSection('home')}
-            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${getFontClass()} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'home'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -92,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => scrollToSection('our-story')}
-            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${getFontClass()} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'our-story'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -106,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => scrollToSection('details')}
-            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${getFontClass()} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'details'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -120,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => scrollToSection('location')}
-            className={`${currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
+            className={`${getFontClass()} text-xs sm:text-sm tracking-wide transition-colors relative pb-1 cursor-pointer ${
               activeSection === 'location'
                 ? 'text-[#482B19] font-semibold'
                 : 'text-[#684329]/80 hover:text-[#482B19]'
@@ -132,29 +134,32 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* Controls: Language toggle + Audio + Reopen Doors */}
-          <div className="flex items-center gap-2.5 ml-2 pl-3 border-l border-[#D9CDB8]">
-            {/* Language toggle: English default */}
-            <button
-              onClick={() => onLanguageChange(currentLang === 'en' ? 'te' : 'en')}
-              className={`cursor-pointer text-xs font-semibold px-2.5 py-1 rounded-md border border-[#B59A66]/60 text-[#482B19] hover:bg-[#F6F1E8] transition-colors ${
-                currentLang === 'en' ? 'font-telugu' : 'font-sans'
-              }`}
-              title={content.switchLangTooltip}
-              aria-label={content.switchLangTooltip}
-            >
-              {currentLang === 'en' ? 'తెలుగు' : 'English'}
-            </button>
-
-            {/* Audio Toggle */}
-            <button
-              onClick={onToggleAudio}
-              className="cursor-pointer p-1.5 rounded-full text-[#684329] hover:text-[#482B19] hover:bg-[#F6F1E8] transition-colors"
-              title={isPlayingAudio ? content.musicMuteTooltip : content.musicPlayTooltip}
-              aria-label={isPlayingAudio ? content.musicMuteTooltip : content.musicPlayTooltip}
-            >
-              {isPlayingAudio ? <Volume2 size={16} /> : <VolumeX size={16} />}
-            </button>
+          {/* Controls: 3-Language segmented switcher + Replay Entrance */}
+          <div className="flex items-center gap-2 pl-2 sm:pl-3 border-l border-[#D9CDB8]">
+            {/* Language Switcher: English | తెలుగు | ಕನ್ನಡ */}
+            <div className="flex items-center bg-[#EDE4D5]/80 p-0.5 rounded-full border border-[#D9CDB8]">
+              {(
+                [
+                  { code: 'en', label: 'EN', fullName: 'English', font: 'font-sans' },
+                  { code: 'te', label: 'తెలుగు', fullName: 'తెలుగు', font: 'font-telugu' },
+                  { code: 'kn', label: 'ಕನ್ನಡ', fullName: 'ಕನ್ನಡ', font: 'font-kannada' },
+                ] as const
+              ).map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => onLanguageChange(lang.code)}
+                  className={`cursor-pointer text-[11px] sm:text-xs font-semibold px-2 sm:px-2.5 py-1 rounded-full transition-all ${lang.font} ${
+                    currentLang === lang.code
+                      ? 'bg-[#B86C3C] text-white shadow-xs'
+                      : 'text-[#684329] hover:text-[#482B19] hover:bg-white/60'
+                  }`}
+                  title={`Switch to ${lang.fullName}`}
+                  aria-label={`Switch to ${lang.fullName}`}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
 
             {/* Replay Entrance Experience */}
             <button
