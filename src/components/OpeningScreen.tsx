@@ -8,6 +8,199 @@ interface OpeningScreenProps {
   isOpen: boolean;
 }
 
+/**
+ * Ornate Hanging Brass Temple Bell with subtle sway
+ */
+const HangingBrassBell: React.FC<{ direction?: 'left' | 'right'; className?: string }> = ({
+  direction = 'left',
+  className = '',
+}) => {
+  return (
+    <div
+      className={`origin-top pointer-events-none select-none filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.65)] ${
+        direction === 'left' ? 'animate-bell-sway-left' : 'animate-bell-sway-right'
+      } ${className}`}
+    >
+      <svg
+        viewBox="0 0 56 200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-10 sm:w-12 md:w-14 h-40 sm:h-48 md:h-56"
+      >
+        {/* Brass Chain Links from Top Ceiling */}
+        <line x1="28" y1="0" x2="28" y2="108" stroke="#B59A66" strokeWidth="2.5" strokeDasharray="5 3" />
+        <circle cx="28" cy="18" r="3.5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="1" />
+        <circle cx="28" cy="42" r="4" fill="#D4AF37" stroke="#8C6D23" strokeWidth="1" />
+        <circle cx="28" cy="66" r="4.5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="1" />
+        <circle cx="28" cy="90" r="5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="1" />
+        <circle cx="28" cy="106" r="5.5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="1" />
+
+        {/* Top Dome of Bell */}
+        <path d="M18 112 C18 106 38 106 38 112 L36 122 L20 122 Z" fill="url(#bellGoldGrad)" stroke="#8C6D23" strokeWidth="1" />
+
+        {/* Bell Flaring Body */}
+        <path
+          d="M20 122 C20 138 11 154 9 164 C8 168 13 170 28 170 C43 170 48 168 47 164 C45 154 36 138 36 122 Z"
+          fill="url(#bellGoldGrad)"
+          stroke="#8C6D23"
+          strokeWidth="1.2"
+        />
+
+        {/* Bell Rim with Engraved Band */}
+        <ellipse cx="28" cy="170" rx="19" ry="4.5" fill="#E6C36A" stroke="#8C6D23" strokeWidth="1.2" />
+        <ellipse cx="28" cy="170" rx="14" ry="2.8" fill="#4A3410" />
+
+        {/* Sacred Auspicious Motif on Bell */}
+        <circle cx="28" cy="146" r="3.5" fill="#8C6D23" opacity="0.6" />
+        <circle cx="28" cy="146" r="2" fill="#FDE047" opacity="0.9" />
+
+        {/* Clapper and Dangling Bead */}
+        <line x1="28" y1="168" x2="28" y2="186" stroke="#B59A66" strokeWidth="2.5" />
+        <circle cx="28" cy="188" r="4.5" fill="url(#bellGoldGrad)" stroke="#8C6D23" strokeWidth="1" />
+
+        {/* Sacred red ribbon tip */}
+        <path d="M26 192 L30 192 L29 200 L27 200 Z" fill="#DC2626" opacity="0.95" />
+
+        <defs>
+          <linearGradient id="bellGoldGrad" x1="10" y1="110" x2="48" y2="170" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FDE047" />
+            <stop offset="0.25" stopColor="#E6C36A" />
+            <stop offset="0.6" stopColor="#B59A66" />
+            <stop offset="1" stopColor="#785918" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+};
+
+/**
+ * Traditional Floor Diya with animated flickering flame and Urli flower bowl
+ */
+const FloorDiyaAndUrli: React.FC<{ flip?: boolean; className?: string }> = ({
+  flip = false,
+  className = '',
+}) => {
+  return (
+    <div
+      className={`flex items-end gap-2.5 sm:gap-3.5 filter drop-shadow-[0_8px_18px_rgba(0,0,0,0.75)] pointer-events-none select-none ${
+        flip ? 'flex-row-reverse' : ''
+      } ${className}`}
+    >
+      {/* Traditional Brass Diya */}
+      <div className="relative flex flex-col items-center">
+        {/* Soft Golden Ambient Light Halo around Flame */}
+        <div className="absolute -top-6 w-14 h-14 rounded-full bg-radial from-[#F59E0B]/60 via-[#EAB308]/20 to-transparent blur-md pointer-events-none animate-pulse" />
+
+        {/* Animated Diya Flame */}
+        <svg
+          viewBox="0 0 20 32"
+          className="w-5 sm:w-6 h-8 sm:h-9 animate-diya origin-bottom filter drop-shadow-[0_0_10px_rgba(245,158,11,0.95)]"
+        >
+          <path
+            d="M10 2 C10 2 17 12 17 22 C17 27 13.8 30 10 30 C6.2 30 3 27 3 22 C3 12 10 2 10 2 Z"
+            fill="url(#diyaFlameOuter)"
+          />
+          <path
+            d="M10 9 C10 9 14.5 16 14.5 23 C14.5 26.5 12.5 28.5 10 28.5 C7.5 28.5 5.5 26.5 5.5 23 C5.5 16 10 9 10 9 Z"
+            fill="url(#diyaFlameInner)"
+          />
+          <defs>
+            <linearGradient id="diyaFlameOuter" x1="10" y1="2" x2="10" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FEF08A" />
+              <stop offset="0.4" stopColor="#F59E0B" />
+              <stop offset="1" stopColor="#DC2626" />
+            </linearGradient>
+            <linearGradient id="diyaFlameInner" x1="10" y1="9" x2="10" y2="28.5" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FFFFFF" />
+              <stop offset="0.5" stopColor="#FEF08A" />
+              <stop offset="1" stopColor="#F59E0B" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Brass Lamp Basin and Pedestal */}
+        <svg viewBox="0 0 46 34" className="w-11 sm:w-13 h-8 sm:h-9 -mt-1">
+          <ellipse cx="23" cy="8" rx="19" ry="4.5" fill="#E6C36A" stroke="#8C6D23" strokeWidth="0.8" />
+          <path
+            d="M6 8 C8 19 16 23 23 23 C30 23 38 19 40 8 Z"
+            fill="url(#diyaBaseGold)"
+            stroke="#8C6D23"
+            strokeWidth="0.8"
+          />
+          <path d="M18 23 L16 29 L30 29 L28 23 Z" fill="#B59A66" />
+          <ellipse cx="23" cy="29" rx="13" ry="3.5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="0.8" />
+          <defs>
+            <linearGradient id="diyaBaseGold" x1="6" y1="8" x2="40" y2="23" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FDE047" />
+              <stop offset="0.45" stopColor="#B59A66" />
+              <stop offset="1" stopColor="#6B4B15" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      {/* Mini Brass Urli with Floating Petals */}
+      <div className="relative">
+        <svg viewBox="0 0 58 30" className="w-14 sm:w-16 h-8 sm:h-9">
+          <ellipse cx="29" cy="9" rx="26" ry="6.5" fill="#8C6D23" stroke="#D4AF37" strokeWidth="1" />
+          <path
+            d="M4 9 C6 20 15 26 29 26 C43 26 52 20 54 9 Z"
+            fill="url(#miniUrliGold)"
+            stroke="#6B4B15"
+            strokeWidth="1"
+          />
+          <ellipse cx="29" cy="26" rx="15" ry="3" fill="#B59A66" />
+          {/* Water Surface */}
+          <ellipse cx="29" cy="9" rx="23" ry="5" fill="#2E2820" />
+          {/* Floating Petals */}
+          <circle cx="22" cy="8.5" r="3.5" fill="#F59E0B" />
+          <circle cx="30" cy="9.5" r="3.8" fill="#EF4444" />
+          <circle cx="36" cy="8.5" r="3.2" fill="#FEF08A" />
+          <circle cx="26" cy="7.5" r="2.5" fill="#FFFFFF" />
+          <defs>
+            <linearGradient id="miniUrliGold" x1="4" y1="9" x2="54" y2="26" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#E6C36A" />
+              <stop offset="0.5" stopColor="#B59A66" />
+              <stop offset="1" stopColor="#5A4015" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Auspicious Architectural Side Plaque Inscription
+ */
+const AuspiciousSidePlaque: React.FC<{
+  titleSanskrit: string;
+  subtitleRegional: string;
+  subtitleEnglish: string;
+  className?: string;
+}> = ({ titleSanskrit, subtitleRegional, subtitleEnglish, className = '' }) => {
+  return (
+    <div
+      className={`hidden md:flex flex-col items-center gap-1.5 py-4 px-2.5 rounded-full bg-black/40 backdrop-blur-sm border border-[#B59A66]/35 shadow-[0_6px_20px_rgba(0,0,0,0.55)] pointer-events-none select-none ${className}`}
+    >
+      <span className="text-[#D4AF37] text-xs">❖</span>
+      <span className="font-serif text-sm font-semibold tracking-wider text-[#FDE047] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+        {titleSanskrit}
+      </span>
+      <div className="w-4 h-[1px] bg-[#B59A66]/50 my-1" />
+      <span
+        className="font-serif-en text-[10px] tracking-widest text-[#F6F1E8]/80 uppercase font-medium"
+        style={{ writingMode: 'vertical-rl' }}
+      >
+        {subtitleRegional} • {subtitleEnglish}
+      </span>
+      <div className="w-4 h-[1px] bg-[#B59A66]/50 my-1" />
+      <span className="text-[#D4AF37] text-xs">❖</span>
+    </div>
+  );
+};
+
 export const OpeningScreen: React.FC<OpeningScreenProps> = ({
   currentLang,
   onOpen,
@@ -17,6 +210,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
   const [isAnimating, setIsAnimating] = useState(false);
   const [doorsSwung, setDoorsSwung] = useState(false);
   const [fadeComplete, setFadeComplete] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
   // If already opened previously and not animating, unmount
   useEffect(() => {
@@ -40,6 +234,15 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, isAnimating]);
+
+  // Interactive subtle mouse tracking for ambient golden spotlight
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isAnimating || doorsSwung) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+    setMousePos({ x, y });
+  };
 
   if (fadeComplete) {
     return null;
@@ -65,12 +268,45 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
     }, 2100);
   };
 
+  // Golden floating firefly particles along the flanks
+  const fireflies = [
+    { left: '3%', top: '22%', delay: '0.2s', duration: '5.2s', size: 4 },
+    { left: '7%', top: '48%', delay: '1.8s', duration: '6.4s', size: 3 },
+    { left: '11%', top: '72%', delay: '0.7s', duration: '4.8s', size: 5 },
+    { left: '5%', top: '85%', delay: '2.5s', duration: '5.6s', size: 4 },
+    { left: '14%', top: '34%', delay: '3.1s', duration: '6.2s', size: 3 },
+    { left: '9%', top: '16%', delay: '1.2s', duration: '5.1s', size: 4 },
+    { left: '17%', top: '62%', delay: '2.8s', duration: '5.9s', size: 4 },
+    { right: '3%', top: '24%', delay: '0.4s', duration: '5.4s', size: 4 },
+    { right: '7%', top: '46%', delay: '1.6s', duration: '6.2s', size: 3 },
+    { right: '11%', top: '70%', delay: '2.2s', duration: '5.0s', size: 5 },
+    { right: '5%', top: '84%', delay: '0.9s', duration: '5.8s', size: 4 },
+    { right: '14%', top: '36%', delay: '3.0s', duration: '6.5s', size: 3 },
+    { right: '9%', top: '18%', delay: '1.3s', duration: '5.3s', size: 4 },
+    { right: '17%', top: '60%', delay: '2.6s', duration: '5.7s', size: 4 },
+  ];
+
+  // Auspicious falling blossom petals (Marigold, Jasmine & Rose)
+  const petals = [
+    { left: '4%', delay: '0s', duration: '8.5s', color: '#F59E0B', size: 16 },
+    { left: '9%', delay: '3s', duration: '10.5s', color: '#FFFBEB', size: 14 },
+    { left: '13%', delay: '1.5s', duration: '8s', color: '#EA580C', size: 18 },
+    { left: '17%', delay: '5s', duration: '9.5s', color: '#FEF08A', size: 15 },
+    { left: '6%', delay: '7s', duration: '11.5s', color: '#FFFBEB', size: 13 },
+    { right: '4%', delay: '1s', duration: '9s', color: '#F59E0B', size: 16 },
+    { right: '9%', delay: '4s', duration: '11s', color: '#FFFBEB', size: 14 },
+    { right: '13%', delay: '2s', duration: '8.2s', color: '#EA580C', size: 18 },
+    { right: '17%', delay: '6s', duration: '10s', color: '#FEF08A', size: 15 },
+    { right: '6%', delay: '8s', duration: '12s', color: '#FFFBEB', size: 13 },
+  ];
+
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Housewarming Entrance Doors"
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-radial from-[#F7F1E6] via-[#EFE6D6] to-[#E5DAC6] select-none transition-opacity duration-700 ${
+      onMouseMove={handleMouseMove}
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-radial from-[#2C2A27] via-[#1E1C1A] to-[#121110] select-none transition-opacity duration-700 ${
         isAnimating && doorsSwung ? 'pointer-events-none' : ''
       } ${doorsSwung && isAnimating ? 'opacity-90' : 'opacity-100'}`}
       style={{
@@ -78,24 +314,144 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
         transition: 'opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      {/* 4K Aspect-ratio constrained Stage matching Panel 1 composition (1200x896 = 4:3) */}
-      <div className="relative w-full h-full max-w-[1350px] max-h-[100vh] flex items-center justify-center shadow-2xl">
+      {/* ================= FULLSCREEN EXTENDED ARCHITECTURAL BACKDROP ================= */}
+      {/* Eliminates blank black side areas on wide displays and seamlessly continues the scene */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
+        <img
+          src="/assets/images/4k/entrance_frame_4k.png"
+          alt=""
+          className="w-full h-full object-cover scale-110 filter blur-2xl brightness-60 contrast-125 opacity-75"
+        />
+        {/* Soft vignette gradient over the backdrop */}
+        <div className="absolute inset-0 bg-radial from-transparent via-[#141312]/60 to-[#0A0908]/90" />
+      </div>
+
+      {/* ================= INTERACTIVE AMBIENT GOLDEN SPOTLIGHT ================= */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-700"
+        style={{
+          background: `radial-gradient(circle 420px at ${mousePos.x}% ${mousePos.y}%, rgba(245, 158, 11, 0.12) 0%, rgba(181, 154, 102, 0.04) 50%, transparent 80%)`,
+          opacity: doorsSwung ? 0 : 1,
+        }}
+      />
+
+      {/* ================= LEFT & RIGHT FLANK EFFECTS LAYER ================= */}
+      <div
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
+          doorsSwung ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        {/* Architectural Sconce Warm Vertical Light Beams on Left & Right Walls */}
+        <div className="absolute left-[3%] top-1/2 -translate-y-1/2 w-16 h-80 pointer-events-none animate-sconce-breathe opacity-70">
+          <div className="w-12 h-36 bg-gradient-to-t from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-t-full mx-auto" />
+          <div className="w-3 h-8 bg-[#FFE8A3] rounded-xs shadow-[0_0_24px_8px_rgba(245,158,11,0.9)] mx-auto my-1" />
+          <div className="w-14 h-36 bg-gradient-to-b from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-b-full mx-auto" />
+        </div>
+
+        <div className="absolute right-[3%] top-1/2 -translate-y-1/2 w-16 h-80 pointer-events-none animate-sconce-breathe opacity-70">
+          <div className="w-12 h-36 bg-gradient-to-t from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-t-full mx-auto" />
+          <div className="w-3 h-8 bg-[#FFE8A3] rounded-xs shadow-[0_0_24px_8px_rgba(245,158,11,0.9)] mx-auto my-1" />
+          <div className="w-14 h-36 bg-gradient-to-b from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-b-full mx-auto" />
+        </div>
+
+        {/* Suspended Brass Temple Bells on Left & Right Flanks */}
+        <div className="absolute left-[2%] sm:left-[4%] md:left-[6%] top-0 z-20">
+          <HangingBrassBell direction="left" />
+        </div>
+        <div className="absolute right-[2%] sm:right-[4%] md:right-[6%] top-0 z-20">
+          <HangingBrassBell direction="right" />
+        </div>
+
+        {/* Auspicious Architectural Plaque Badges */}
+        <div className="absolute left-[3%] sm:left-[4%] md:left-[5%] top-1/2 -translate-y-1/2 z-15">
+          <AuspiciousSidePlaque
+            titleSanskrit="॥ शुभ ॥"
+            subtitleRegional="ಆಶೀರ್ವಾದ"
+            subtitleEnglish="BLESSINGS"
+          />
+        </div>
+        <div className="absolute right-[3%] sm:right-[4%] md:right-[5%] top-1/2 -translate-y-1/2 z-15">
+          <AuspiciousSidePlaque
+            titleSanskrit="॥ लाभ ॥"
+            subtitleRegional="ಸಮೃದ್ಧಿ"
+            subtitleEnglish="PROSPERITY"
+          />
+        </div>
+
+        {/* Traditional Glowing Floor Diyas & Flower Urlis at Bottom Corners */}
+        <div className="absolute left-[2%] sm:left-[4%] md:left-[5%] bottom-4 sm:bottom-6 md:bottom-8 z-20">
+          <FloorDiyaAndUrli flip={false} />
+        </div>
+        <div className="absolute right-[2%] sm:right-[4%] md:right-[5%] bottom-4 sm:bottom-6 md:bottom-8 z-20">
+          <FloorDiyaAndUrli flip={true} />
+        </div>
+
+        {/* Floating Golden Fireflies / Embers */}
+        {fireflies.map((ff, idx) => (
+          <div
+            key={`ff-${idx}`}
+            className="absolute rounded-full bg-[#F59E0B] animate-firefly pointer-events-none"
+            style={{
+              left: ff.left,
+              right: ff.right,
+              top: ff.top,
+              width: `${ff.size}px`,
+              height: `${ff.size}px`,
+              animationDelay: ff.delay,
+              animationDuration: ff.duration,
+              boxShadow:
+                '0 0 10px 3px rgba(245, 158, 11, 0.85), 0 0 20px 6px rgba(217, 119, 6, 0.45)',
+            }}
+          />
+        ))}
+
+        {/* Auspicious Falling Blossom Petals */}
+        {petals.map((petal, idx) => (
+          <div
+            key={`petal-${idx}`}
+            className="absolute pointer-events-none animate-petal"
+            style={{
+              left: petal.left,
+              right: petal.right,
+              top: 0,
+              animationDelay: petal.delay,
+              animationDuration: petal.duration,
+            }}
+          >
+            <svg
+              width={petal.size}
+              height={petal.size}
+              viewBox="0 0 24 24"
+              fill={petal.color}
+              className="filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+            >
+              <path
+                d="M12 2 C16 6 22 12 20 18 C18 22 14 22 12 22 C10 22 6 22 4 18 C2 12 8 6 12 2 Z"
+                opacity="0.88"
+              />
+            </svg>
+          </div>
+        ))}
+      </div>
+
+      {/* ================= 16:9 MAIN ENTRANCE STAGE ================= */}
+      <div className="relative w-full h-full max-w-[1920px] max-h-[100vh] flex items-center justify-center shadow-2xl z-10">
         <div
           className="relative w-full h-full flex items-center justify-center"
           style={{
-            aspectRatio: '1200 / 896',
+            aspectRatio: '16 / 9',
             maxHeight: '100vh',
-            maxWidth: 'calc(100vh * (1200 / 896))',
+            maxWidth: 'calc(100vh * (16 / 9))',
           }}
         >
           {/* ================= LAYER 0: DARK DOORWAY THRESHOLD CAVITY ================= */}
           <div
-            className="absolute z-0 bg-[#2A1408]"
+            className="absolute z-0 bg-[#1A1816]"
             style={{
-              left: '24.5%',
-              top: '12.8%',
-              width: '51.0%',
-              height: '70.3%',
+              left: '24.12%',
+              top: '17.01%',
+              width: '51.56%',
+              height: '69.44%',
             }}
           />
 
@@ -103,10 +459,10 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
           <div
             className="absolute z-1 overflow-hidden"
             style={{
-              left: '24.5%',
-              top: '12.8%',
-              width: '51.0%',
-              height: '70.3%',
+              left: '24.12%',
+              top: '17.01%',
+              width: '51.56%',
+              height: '69.44%',
             }}
           >
             {/* The 4K sunlit courtyard photograph revealed upon opening */}
@@ -130,10 +486,10 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
           <div
             className="absolute z-10 flex"
             style={{
-              left: '24.5%',
-              top: '12.8%',
-              width: '51.0%',
-              height: '70.3%',
+              left: '24.12%',
+              top: '17.01%',
+              width: '51.56%',
+              height: '69.44%',
               perspective: '1400px',
               perspectiveOrigin: '50% 50%',
             }}
@@ -202,14 +558,30 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               isAnimating ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
             }`}
             style={{
-              left: '24.5%',
-              top: '20%',
-              width: '51.0%',
-              height: '52%',
+              left: '24.12%',
+              top: '18%',
+              width: '51.56%',
+              height: '66%',
             }}
           >
+            {/* Soft sacred warm ambient glow behind typography */}
+            <div
+              className="absolute inset-0 -z-10 rounded-full blur-2xl opacity-40 pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(184, 108, 60, 0.2) 50%, transparent 80%)',
+              }}
+            />
             {/* Dynamic Heading based on active language */}
-            <h1 className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-display'} text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}>
+            <h1
+              className={`${
+                currentLang === 'kn'
+                  ? 'font-kannada'
+                  : currentLang === 'te'
+                  ? 'font-telugu'
+                  : 'font-display'
+              } text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
+            >
               {content.heading.split('\n').map((line, idx) => (
                 <React.Fragment key={idx}>
                   {line}
@@ -219,7 +591,15 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
             </h1>
 
             {/* Dynamic Subheading matching selected language */}
-            <p className={`${currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'} text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}>
+            <p
+              className={`${
+                currentLang === 'kn'
+                  ? 'font-kannada'
+                  : currentLang === 'te'
+                  ? 'font-telugu'
+                  : 'font-sans'
+              } text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}
+            >
               {content.subheading}
             </p>
 
@@ -236,8 +616,12 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
               onClick={handleOpenClick}
               disabled={isAnimating || doorsSwung}
               className={`group cursor-pointer bg-[#F6F1E8] hover:bg-white text-[#482B19] active:scale-95 ${
-                currentLang === 'kn' ? 'font-kannada' : currentLang === 'te' ? 'font-telugu' : 'font-sans'
-              } font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/50`}
+                currentLang === 'kn'
+                  ? 'font-kannada'
+                  : currentLang === 'te'
+                  ? 'font-telugu'
+                  : 'font-sans'
+              } font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full border border-[#B59A66]/50 shadow-[0_6px_22px_rgba(72,43,25,0.35)] hover:shadow-[0_8px_28px_rgba(184,108,60,0.45)] hover:border-[#B59A66] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/40`}
               aria-label={
                 currentLang === 'kn'
                   ? 'ಗೃಹಪ್ರವೇಶ ಆಹ್ವಾನವನ್ನು ವೀಕ್ಷಿಸಲು ಬಾಗಿಲು ತೆರೆಯಿರಿ'

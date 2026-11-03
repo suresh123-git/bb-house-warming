@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { Language } from './data/invitation';
 import { OpeningScreen } from './components/OpeningScreen';
+import { PetalFallEffect } from './components/PetalFallEffect';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { OurStorySection } from './components/OurStorySection';
@@ -39,6 +40,9 @@ export const App: React.FC = () => {
 
       {/* Screen 3: Invitation Reveal and Main Website */}
       <div className={`flex flex-col flex-1 w-full transition-opacity duration-1000 ${isDoorOpen ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Continuous Auspicious Flower Petals Fall Effect across Main Application */}
+        {isDoorOpen && <PetalFallEffect />}
+
         {/* Navigation Bar matching Panel 3 */}
         <Navbar
           currentLang={currentLang}

@@ -100,7 +100,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ currentLang })
         {/* Bottom fine line-art house facade sketch matching Panel 6 */}
         <div className="w-full max-w-xs mt-10 opacity-70 pointer-events-none">
           <img
-            src="/assets/reference_crops/house_sketch_clean.png"
+            src="/assets/images/house_sketch_clean.png"
             alt="Traditional Home Facade Line Art"
             className="w-full h-auto object-contain mx-auto"
           />
