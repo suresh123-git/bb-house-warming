@@ -9,7 +9,7 @@ interface OpeningScreenProps {
 }
 
 /**
- * Ornate Hanging Brass Temple Bell with subtle sway
+ * Ornate Hanging Brass Temple Bell for Left & Right Blank Flanks
  */
 const HangingBrassBell: React.FC<{ direction?: 'left' | 'right'; className?: string }> = ({
   direction = 'left',
@@ -17,7 +17,7 @@ const HangingBrassBell: React.FC<{ direction?: 'left' | 'right'; className?: str
 }) => {
   return (
     <div
-      className={`origin-top pointer-events-none select-none filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.65)] ${
+      className={`origin-top pointer-events-none select-none filter drop-shadow-[0_6px_16px_rgba(0,0,0,0.65)] ${
         direction === 'left' ? 'animate-bell-sway-left' : 'animate-bell-sway-right'
       } ${className}`}
     >
@@ -25,7 +25,7 @@ const HangingBrassBell: React.FC<{ direction?: 'left' | 'right'; className?: str
         viewBox="0 0 56 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-10 sm:w-12 md:w-14 h-40 sm:h-48 md:h-56"
+        className="w-8 sm:w-10 md:w-11 h-32 sm:h-40 md:h-44"
       >
         {/* Brass Chain Links from Top Ceiling */}
         <line x1="28" y1="0" x2="28" y2="108" stroke="#B59A66" strokeWidth="2.5" strokeDasharray="5 3" />
@@ -36,12 +36,12 @@ const HangingBrassBell: React.FC<{ direction?: 'left' | 'right'; className?: str
         <circle cx="28" cy="106" r="5.5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="1" />
 
         {/* Top Dome of Bell */}
-        <path d="M18 112 C18 106 38 106 38 112 L36 122 L20 122 Z" fill="url(#bellGoldGrad)" stroke="#8C6D23" strokeWidth="1" />
+        <path d="M18 112 C18 106 38 106 38 112 L36 122 L20 122 Z" fill="url(#bellGoldGradSide)" stroke="#8C6D23" strokeWidth="1" />
 
         {/* Bell Flaring Body */}
         <path
           d="M20 122 C20 138 11 154 9 164 C8 168 13 170 28 170 C43 170 48 168 47 164 C45 154 36 138 36 122 Z"
-          fill="url(#bellGoldGrad)"
+          fill="url(#bellGoldGradSide)"
           stroke="#8C6D23"
           strokeWidth="1.2"
         />
@@ -56,13 +56,13 @@ const HangingBrassBell: React.FC<{ direction?: 'left' | 'right'; className?: str
 
         {/* Clapper and Dangling Bead */}
         <line x1="28" y1="168" x2="28" y2="186" stroke="#B59A66" strokeWidth="2.5" />
-        <circle cx="28" cy="188" r="4.5" fill="url(#bellGoldGrad)" stroke="#8C6D23" strokeWidth="1" />
+        <circle cx="28" cy="188" r="4.5" fill="url(#bellGoldGradSide)" stroke="#8C6D23" strokeWidth="1" />
 
         {/* Sacred red ribbon tip */}
         <path d="M26 192 L30 192 L29 200 L27 200 Z" fill="#DC2626" opacity="0.95" />
 
         <defs>
-          <linearGradient id="bellGoldGrad" x1="10" y1="110" x2="48" y2="170" gradientUnits="userSpaceOnUse">
+          <linearGradient id="bellGoldGradSide" x1="10" y1="110" x2="48" y2="170" gradientUnits="userSpaceOnUse">
             <stop stopColor="#FDE047" />
             <stop offset="0.25" stopColor="#E6C36A" />
             <stop offset="0.6" stopColor="#B59A66" />
@@ -83,35 +83,35 @@ const FloorDiyaAndUrli: React.FC<{ flip?: boolean; className?: string }> = ({
 }) => {
   return (
     <div
-      className={`flex items-end gap-2.5 sm:gap-3.5 filter drop-shadow-[0_8px_18px_rgba(0,0,0,0.75)] pointer-events-none select-none ${
+      className={`flex items-end gap-2 filter drop-shadow-[0_8px_18px_rgba(0,0,0,0.75)] pointer-events-none select-none origin-bottom ${
         flip ? 'flex-row-reverse' : ''
       } ${className}`}
     >
       {/* Traditional Brass Diya */}
       <div className="relative flex flex-col items-center">
         {/* Soft Golden Ambient Light Halo around Flame */}
-        <div className="absolute -top-6 w-14 h-14 rounded-full bg-radial from-[#F59E0B]/60 via-[#EAB308]/20 to-transparent blur-md pointer-events-none animate-pulse" />
+        <div className="absolute -top-5 w-12 h-12 rounded-full bg-radial from-[#F59E0B]/60 via-[#EAB308]/20 to-transparent blur-md pointer-events-none animate-pulse" />
 
         {/* Animated Diya Flame */}
         <svg
           viewBox="0 0 20 32"
-          className="w-5 sm:w-6 h-8 sm:h-9 animate-diya origin-bottom filter drop-shadow-[0_0_10px_rgba(245,158,11,0.95)]"
+          className="w-5 h-8 animate-diya origin-bottom filter drop-shadow-[0_0_8px_rgba(245,158,11,0.95)]"
         >
           <path
             d="M10 2 C10 2 17 12 17 22 C17 27 13.8 30 10 30 C6.2 30 3 27 3 22 C3 12 10 2 10 2 Z"
-            fill="url(#diyaFlameOuter)"
+            fill="url(#diyaFlameOuterSide)"
           />
           <path
             d="M10 9 C10 9 14.5 16 14.5 23 C14.5 26.5 12.5 28.5 10 28.5 C7.5 28.5 5.5 26.5 5.5 23 C5.5 16 10 9 10 9 Z"
-            fill="url(#diyaFlameInner)"
+            fill="url(#diyaFlameInnerSide)"
           />
           <defs>
-            <linearGradient id="diyaFlameOuter" x1="10" y1="2" x2="10" y2="30" gradientUnits="userSpaceOnUse">
+            <linearGradient id="diyaFlameOuterSide" x1="10" y1="2" x2="10" y2="30" gradientUnits="userSpaceOnUse">
               <stop stopColor="#FEF08A" />
               <stop offset="0.4" stopColor="#F59E0B" />
               <stop offset="1" stopColor="#DC2626" />
             </linearGradient>
-            <linearGradient id="diyaFlameInner" x1="10" y1="9" x2="10" y2="28.5" gradientUnits="userSpaceOnUse">
+            <linearGradient id="diyaFlameInnerSide" x1="10" y1="9" x2="10" y2="28.5" gradientUnits="userSpaceOnUse">
               <stop stopColor="#FFFFFF" />
               <stop offset="0.5" stopColor="#FEF08A" />
               <stop offset="1" stopColor="#F59E0B" />
@@ -120,18 +120,18 @@ const FloorDiyaAndUrli: React.FC<{ flip?: boolean; className?: string }> = ({
         </svg>
 
         {/* Brass Lamp Basin and Pedestal */}
-        <svg viewBox="0 0 46 34" className="w-11 sm:w-13 h-8 sm:h-9 -mt-1">
+        <svg viewBox="0 0 46 34" className="w-10 h-7 -mt-1">
           <ellipse cx="23" cy="8" rx="19" ry="4.5" fill="#E6C36A" stroke="#8C6D23" strokeWidth="0.8" />
           <path
             d="M6 8 C8 19 16 23 23 23 C30 23 38 19 40 8 Z"
-            fill="url(#diyaBaseGold)"
+            fill="url(#diyaBaseGoldSide)"
             stroke="#8C6D23"
             strokeWidth="0.8"
           />
           <path d="M18 23 L16 29 L30 29 L28 23 Z" fill="#B59A66" />
           <ellipse cx="23" cy="29" rx="13" ry="3.5" fill="#D4AF37" stroke="#8C6D23" strokeWidth="0.8" />
           <defs>
-            <linearGradient id="diyaBaseGold" x1="6" y1="8" x2="40" y2="23" gradientUnits="userSpaceOnUse">
+            <linearGradient id="diyaBaseGoldSide" x1="6" y1="8" x2="40" y2="23" gradientUnits="userSpaceOnUse">
               <stop stopColor="#FDE047" />
               <stop offset="0.45" stopColor="#B59A66" />
               <stop offset="1" stopColor="#6B4B15" />
@@ -142,11 +142,11 @@ const FloorDiyaAndUrli: React.FC<{ flip?: boolean; className?: string }> = ({
 
       {/* Mini Brass Urli with Floating Petals */}
       <div className="relative">
-        <svg viewBox="0 0 58 30" className="w-14 sm:w-16 h-8 sm:h-9">
+        <svg viewBox="0 0 58 30" className="w-12 h-6">
           <ellipse cx="29" cy="9" rx="26" ry="6.5" fill="#8C6D23" stroke="#D4AF37" strokeWidth="1" />
           <path
             d="M4 9 C6 20 15 26 29 26 C43 26 52 20 54 9 Z"
-            fill="url(#miniUrliGold)"
+            fill="url(#miniUrliGoldSide)"
             stroke="#6B4B15"
             strokeWidth="1"
           />
@@ -159,7 +159,7 @@ const FloorDiyaAndUrli: React.FC<{ flip?: boolean; className?: string }> = ({
           <circle cx="36" cy="8.5" r="3.2" fill="#FEF08A" />
           <circle cx="26" cy="7.5" r="2.5" fill="#FFFFFF" />
           <defs>
-            <linearGradient id="miniUrliGold" x1="4" y1="9" x2="54" y2="26" gradientUnits="userSpaceOnUse">
+            <linearGradient id="miniUrliGoldSide" x1="4" y1="9" x2="54" y2="26" gradientUnits="userSpaceOnUse">
               <stop stopColor="#E6C36A" />
               <stop offset="0.5" stopColor="#B59A66" />
               <stop offset="1" stopColor="#5A4015" />
@@ -172,7 +172,7 @@ const FloorDiyaAndUrli: React.FC<{ flip?: boolean; className?: string }> = ({
 };
 
 /**
- * Auspicious Architectural Side Plaque Inscription
+ * Auspicious Architectural Side Plaque Inscription for Left & Right Blank Flanks
  */
 const AuspiciousSidePlaque: React.FC<{
   titleSanskrit: string;
@@ -182,7 +182,7 @@ const AuspiciousSidePlaque: React.FC<{
 }> = ({ titleSanskrit, subtitleRegional, subtitleEnglish, className = '' }) => {
   return (
     <div
-      className={`hidden md:flex flex-col items-center gap-1.5 py-4 px-2.5 rounded-full bg-black/40 backdrop-blur-sm border border-[#B59A66]/35 shadow-[0_6px_20px_rgba(0,0,0,0.55)] pointer-events-none select-none ${className}`}
+      className={`flex flex-col items-center gap-1.5 py-4 px-2.5 rounded-full bg-black/45 backdrop-blur-md border border-[#B59A66]/40 shadow-[0_8px_24px_rgba(0,0,0,0.6)] pointer-events-none select-none ${className}`}
     >
       <span className="text-[#D4AF37] text-xs">❖</span>
       <span className="font-serif text-sm font-semibold tracking-wider text-[#FDE047] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
@@ -190,7 +190,7 @@ const AuspiciousSidePlaque: React.FC<{
       </span>
       <div className="w-4 h-[1px] bg-[#B59A66]/50 my-1" />
       <span
-        className="font-serif-en text-[10px] tracking-widest text-[#F6F1E8]/80 uppercase font-medium"
+        className="font-serif-en text-[10px] tracking-widest text-[#F6F1E8]/85 uppercase font-medium"
         style={{ writingMode: 'vertical-rl' }}
       >
         {subtitleRegional} • {subtitleEnglish}
@@ -268,7 +268,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
     }, 2100);
   };
 
-  // Golden floating firefly particles along the flanks
+  // Golden floating firefly particles along the screen
   const fireflies = [
     { left: '3%', top: '22%', delay: '0.2s', duration: '5.2s', size: 4 },
     { left: '7%', top: '48%', delay: '1.8s', duration: '6.4s', size: 3 },
@@ -286,7 +286,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
     { right: '17%', top: '60%', delay: '2.6s', duration: '5.7s', size: 4 },
   ];
 
-  // Auspicious falling blossom petals (Marigold, Jasmine & Rose)
+  // Auspicious falling blossom petals
   const petals = [
     { left: '4%', delay: '0s', duration: '8.5s', color: '#F59E0B', size: 16 },
     { left: '9%', delay: '3s', duration: '10.5s', color: '#FFFBEB', size: 14 },
@@ -315,7 +315,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
       }}
     >
       {/* ================= FULLSCREEN EXTENDED ARCHITECTURAL BACKDROP ================= */}
-      {/* Eliminates blank black side areas on wide displays and seamlessly continues the scene */}
+      {/* Eliminates blank black side/vertical areas and seamlessly continues the scene */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
         <img
           src="/assets/images/4k/entrance_frame_4k.png"
@@ -335,57 +335,12 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
         }}
       />
 
-      {/* ================= LEFT & RIGHT FLANK EFFECTS LAYER ================= */}
+      {/* ================= AMBIENT PARTICLES (FIREFLIES & PETALS) ================= */}
       <div
         className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
           doorsSwung ? 'opacity-0' : 'opacity-100'
         }`}
       >
-        {/* Architectural Sconce Warm Vertical Light Beams on Left & Right Walls */}
-        <div className="absolute left-[3%] top-1/2 -translate-y-1/2 w-16 h-80 pointer-events-none animate-sconce-breathe opacity-70">
-          <div className="w-12 h-36 bg-gradient-to-t from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-t-full mx-auto" />
-          <div className="w-3 h-8 bg-[#FFE8A3] rounded-xs shadow-[0_0_24px_8px_rgba(245,158,11,0.9)] mx-auto my-1" />
-          <div className="w-14 h-36 bg-gradient-to-b from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-b-full mx-auto" />
-        </div>
-
-        <div className="absolute right-[3%] top-1/2 -translate-y-1/2 w-16 h-80 pointer-events-none animate-sconce-breathe opacity-70">
-          <div className="w-12 h-36 bg-gradient-to-t from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-t-full mx-auto" />
-          <div className="w-3 h-8 bg-[#FFE8A3] rounded-xs shadow-[0_0_24px_8px_rgba(245,158,11,0.9)] mx-auto my-1" />
-          <div className="w-14 h-36 bg-gradient-to-b from-[#F59E0B]/35 via-[#F59E0B]/10 to-transparent blur-md rounded-b-full mx-auto" />
-        </div>
-
-        {/* Suspended Brass Temple Bells on Left & Right Flanks */}
-        <div className="absolute left-[2%] sm:left-[4%] md:left-[6%] top-0 z-20">
-          <HangingBrassBell direction="left" />
-        </div>
-        <div className="absolute right-[2%] sm:right-[4%] md:right-[6%] top-0 z-20">
-          <HangingBrassBell direction="right" />
-        </div>
-
-        {/* Auspicious Architectural Plaque Badges */}
-        <div className="absolute left-[3%] sm:left-[4%] md:left-[5%] top-1/2 -translate-y-1/2 z-15">
-          <AuspiciousSidePlaque
-            titleSanskrit="॥ शुभ ॥"
-            subtitleRegional="ಆಶೀರ್ವಾದ"
-            subtitleEnglish="BLESSINGS"
-          />
-        </div>
-        <div className="absolute right-[3%] sm:right-[4%] md:right-[5%] top-1/2 -translate-y-1/2 z-15">
-          <AuspiciousSidePlaque
-            titleSanskrit="॥ लाभ ॥"
-            subtitleRegional="ಸಮೃದ್ಧಿ"
-            subtitleEnglish="PROSPERITY"
-          />
-        </div>
-
-        {/* Traditional Glowing Floor Diyas & Flower Urlis at Bottom Corners */}
-        <div className="absolute left-[2%] sm:left-[4%] md:left-[5%] bottom-4 sm:bottom-6 md:bottom-8 z-20">
-          <FloorDiyaAndUrli flip={false} />
-        </div>
-        <div className="absolute right-[2%] sm:right-[4%] md:right-[5%] bottom-4 sm:bottom-6 md:bottom-8 z-20">
-          <FloorDiyaAndUrli flip={true} />
-        </div>
-
         {/* Floating Golden Fireflies / Embers */}
         {fireflies.map((ff, idx) => (
           <div
@@ -434,14 +389,44 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
         ))}
       </div>
 
-      {/* ================= 16:9 MAIN ENTRANCE STAGE ================= */}
-      <div className="relative w-full h-full max-w-[1920px] max-h-[100vh] flex items-center justify-center shadow-2xl z-10">
+      {/* ================= ENTRANCE STAGE & SIDE WINGS ================= */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full max-h-[100dvh]">
+        {/* ================= LEFT WING: LOCATED IN THE LEFT BLANK SPACE OUTSIDE THE FRAME ================= */}
         <div
-          className="relative w-full h-full flex items-center justify-center"
+          className={`hidden md:flex flex-col items-center justify-between h-full py-6 px-3 z-20 pointer-events-none select-none flex-1 max-w-[220px] transition-opacity duration-700 ${
+            doorsSwung ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          {/* Top: Hanging Brass Bell */}
+          <div className="pt-2">
+            <HangingBrassBell direction="left" />
+          </div>
+
+          {/* Middle: Warm Sconce Light & Auspicious Blessings Plaque */}
+          <div className="relative flex flex-col items-center my-auto py-4">
+            <div className="absolute inset-0 w-16 -left-3 bg-gradient-to-b from-[#F59E0B]/25 via-[#F59E0B]/10 to-transparent blur-md rounded-full pointer-events-none animate-sconce-breathe" />
+            <AuspiciousSidePlaque
+              titleSanskrit="॥ शुभ ॥"
+              subtitleRegional="ಆಶೀರ್ವಾದ"
+              subtitleEnglish="BLESSINGS"
+            />
+          </div>
+
+          {/* Bottom: Floor Diya with Flickering Flame & Flower Urli */}
+          <div className="pb-4">
+            <FloorDiyaAndUrli flip={false} />
+          </div>
+        </div>
+
+        {/* ================= CENTER: EXACT 16:9 ENTRANCE STAGE ================= */}
+        {/* The entrance frame in the center remains 100% clean and unobstructed */}
+        <div
+          className="relative flex-none flex items-center justify-center shadow-2xl overflow-hidden"
           style={{
             aspectRatio: '16 / 9',
-            maxHeight: '100vh',
-            maxWidth: 'calc(100vh * (16 / 9))',
+            height: 'min(100dvh, calc(100vw * (9 / 16)))',
+            maxHeight: '100dvh',
+            maxWidth: 'calc(100dvh * (16 / 9))',
           }}
         >
           {/* ================= LAYER 0: DARK DOORWAY THRESHOLD CAVITY ================= */}
@@ -553,20 +538,21 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
           </div>
 
           {/* ================= LAYER 4: CENTERED TYPOGRAPHY & INTERACTIVE BUTTON ================= */}
+          {/* Responsively scaled so it fits cleanly inside the doors on mobile, tablet & desktop */}
           <div
-            className={`absolute z-30 flex flex-col items-center justify-center text-center px-4 transition-all duration-400 ${
+            className={`absolute z-30 flex flex-col items-center justify-center text-center px-2 sm:px-4 transition-all duration-400 ${
               isAnimating ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
             }`}
             style={{
               left: '24.12%',
-              top: '18%',
+              top: '17.01%',
               width: '51.56%',
-              height: '66%',
+              height: '69.44%',
             }}
           >
             {/* Soft sacred warm ambient glow behind typography */}
             <div
-              className="absolute inset-0 -z-10 rounded-full blur-2xl opacity-40 pointer-events-none"
+              className="absolute inset-0 -z-10 rounded-full blur-xl sm:blur-2xl opacity-40 pointer-events-none"
               style={{
                 background:
                   'radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, rgba(184, 108, 60, 0.2) 50%, transparent 80%)',
@@ -580,7 +566,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
                   : currentLang === 'te'
                   ? 'font-telugu'
                   : 'font-display'
-              } text-3xl sm:text-4xl md:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
+              } text-base sm:text-2xl md:text-4xl lg:text-5xl text-[#F6F1E8] font-normal leading-tight tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
             >
               {content.heading.split('\n').map((line, idx) => (
                 <React.Fragment key={idx}>
@@ -598,15 +584,15 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
                   : currentLang === 'te'
                   ? 'font-telugu'
                   : 'font-sans'
-              } text-base sm:text-lg md:text-xl text-[#F9F6EF]/95 font-medium mt-3 md:mt-4 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}
+              } text-[10px] sm:text-xs md:text-base lg:text-lg text-[#F9F6EF]/95 font-medium mt-1 sm:mt-2 md:mt-3 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]`}
             >
               {content.subheading}
             </p>
 
             {/* Subtle brass divider with ornament */}
-            <div className="flex items-center justify-center gap-2 my-4 md:my-5 w-44 opacity-85">
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 my-1.5 sm:my-3 md:my-4 w-24 sm:w-36 md:w-44 opacity-85">
               <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[#B59A66]" />
-              <span className="text-[#B59A66] text-xs">❖</span>
+              <span className="text-[#B59A66] text-[10px] sm:text-xs">❖</span>
               <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[#B59A66]" />
             </div>
 
@@ -621,7 +607,7 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
                   : currentLang === 'te'
                   ? 'font-telugu'
                   : 'font-sans'
-              } font-semibold text-xs sm:text-sm tracking-widest uppercase px-7 sm:px-9 py-3 sm:py-3.5 rounded-full border border-[#B59A66]/50 shadow-[0_6px_22px_rgba(72,43,25,0.35)] hover:shadow-[0_8px_28px_rgba(184,108,60,0.45)] hover:border-[#B59A66] transition-all duration-300 flex items-center gap-2.5 mt-2 hover:ring-2 hover:ring-[#B59A66]/40`}
+              } font-semibold text-[10px] sm:text-xs md:text-sm tracking-widest uppercase px-4 sm:px-6 md:px-8 py-1.5 sm:py-2.5 md:py-3.5 rounded-full border border-[#B59A66]/50 shadow-[0_4px_16px_rgba(72,43,25,0.35)] hover:shadow-[0_6px_22px_rgba(184,108,60,0.45)] hover:border-[#B59A66] transition-all duration-300 flex items-center gap-1.5 sm:gap-2.5 hover:ring-2 hover:ring-[#B59A66]/40`}
               aria-label={
                 currentLang === 'kn'
                   ? 'ಗೃಹಪ್ರವೇಶ ಆಹ್ವಾನವನ್ನು ವೀಕ್ಷಿಸಲು ಬಾಗಿಲು ತೆರೆಯಿರಿ'
@@ -632,6 +618,33 @@ export const OpeningScreen: React.FC<OpeningScreenProps> = ({
             >
               <span>{content.openBtn}</span>
             </button>
+          </div>
+        </div>
+
+        {/* ================= RIGHT WING: LOCATED IN THE RIGHT BLANK SPACE OUTSIDE THE FRAME ================= */}
+        <div
+          className={`hidden md:flex flex-col items-center justify-between h-full py-6 px-3 z-20 pointer-events-none select-none flex-1 max-w-[220px] transition-opacity duration-700 ${
+            doorsSwung ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          {/* Top: Hanging Brass Bell */}
+          <div className="pt-2">
+            <HangingBrassBell direction="right" />
+          </div>
+
+          {/* Middle: Warm Sconce Light & Auspicious Prosperity Plaque */}
+          <div className="relative flex flex-col items-center my-auto py-4">
+            <div className="absolute inset-0 w-16 -left-3 bg-gradient-to-b from-[#F59E0B]/25 via-[#F59E0B]/10 to-transparent blur-md rounded-full pointer-events-none animate-sconce-breathe" />
+            <AuspiciousSidePlaque
+              titleSanskrit="॥ लाभ ॥"
+              subtitleRegional="ಸಮೃದ್ಧಿ"
+              subtitleEnglish="PROSPERITY"
+            />
+          </div>
+
+          {/* Bottom: Floor Diya with Flickering Flame & Flower Urli */}
+          <div className="pb-4">
+            <FloorDiyaAndUrli flip={true} />
           </div>
         </div>
       </div>

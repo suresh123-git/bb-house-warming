@@ -94,7 +94,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       subtitleLine1: 'We warmly invite you to celebrate',
       subtitleLine2: 'the beginning of our new home',
       secondarySubtitle: 'Join us as we step into this beautiful new chapter together.',
-      date: 'Monday, 16 November 2026',
+      date: 'Sunday, 15 November 2026',
     },
     story: {
       eyebrow: 'OUR STORY',
@@ -106,8 +106,8 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     details: {
       eyebrow: 'THE CELEBRATION',
       title: 'House Warming',
-      dateDay: 'Monday',
-      dateFull: '16 November 2026',
+      dateDay: 'Sunday',
+      dateFull: '15 November 2026',
       timeLabel: 'Lunch Time',
       timeValue: 'From 12:30 PM',
     },
@@ -136,7 +136,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     footer: {
       closingQuote: 'May our new home be blessed with eternal love, peace, and abundance.',
       brand: 'Bikas & Bhargavi',
-      date: '16 November 2026',
+      date: '15 November 2026',
       subnote: 'House Warming Ceremony • 2026',
     },
   },
@@ -164,7 +164,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       subtitleLine1: 'మా కొత్త ఇంటి గృహప్రవేశ మహోత్సవానికి',
       subtitleLine2: 'మిమ్మల్ని మరియు మీ కుటుంబాన్ని సాదరంగా ఆహ్వానిస్తున్నాము',
       secondarySubtitle: 'మా నూతన ప్రయాణంలో మీరందరూ భాగస్వాములు కావాలని మనస్ఫూర్తిగా కోరుకుంటున్నాము.',
-      date: 'సోమవారం, 16 నవంబర్ 2026',
+      date: 'ఆదివారం, 15 నవంబర్ 2026',
     },
     story: {
       eyebrow: 'మా కథ',
@@ -176,8 +176,8 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     details: {
       eyebrow: 'శుభ మహోత్సవం',
       title: 'గృహప్రవేశం',
-      dateDay: 'సోమవారం',
-      dateFull: '16 నవంబర్ 2026',
+      dateDay: 'ఆదివారం',
+      dateFull: '15 నవంబర్ 2026',
       timeLabel: 'భోజన సమయం',
       timeValue: 'మధ్యాహ్నం 12:30 నుండి',
     },
@@ -206,7 +206,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     footer: {
       closingQuote: 'మా నూతన గృహానికి మీ ఆశీస్సులే మాకు కొండంత బలం.',
       brand: 'బికాస్ & భార్గవి',
-      date: '16 నవంబర్ 2026',
+      date: '15 నవంబర్ 2026',
       subnote: 'గృహప్రవేశ మహోత్సవం • 2026',
     },
   },
@@ -234,7 +234,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
       subtitleLine1: 'ನಮ್ಮ ಹೊಸ ಮನೆಯ ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವಕ್ಕೆ',
       subtitleLine2: 'ನಿಮ್ಮನ್ನು ಮತ್ತು ನಿಮ್ಮ ಕುಟುಂಬವನ್ನು ಪ್ರೀತಿಯಿಂದ ಆಹ್ವಾನಿಸುತ್ತಿದ್ದೇವೆ',
       secondarySubtitle: 'ನಮ್ಮ ಈ ನೂತನ ಪಯಣದಲ್ಲಿ ನಿಮ್ಮ ಆಶೀರ್ವಾದ ಸದಾ ಇರಲಿ ಎಂದು ಬಯಸುತ್ತೇವೆ.',
-      date: 'ಸೋಮವಾರ, 16 ನವೆಂಬರ್ 2026',
+      date: 'ಭಾನುವಾರ, 15 ನವೆಂಬರ್ 2026',
     },
     story: {
       eyebrow: 'ನಮ್ಮ ಕಥೆ',
@@ -246,8 +246,8 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     details: {
       eyebrow: 'ಶುಭ ಸಮಾರಂಭ',
       title: 'ಗೃಹಪ್ರವೇಶ',
-      dateDay: 'ಸೋಮವಾರ',
-      dateFull: '16 ನವೆಂಬರ್ 2026',
+      dateDay: 'ಭಾನುವಾರ',
+      dateFull: '15 ನವೆಂಬರ್ 2026',
       timeLabel: 'ಊಟದ ಸಮಯ',
       timeValue: 'ಮಧ್ಯಾಹ್ನ 12:30 ರಿಂದ',
     },
@@ -276,7 +276,7 @@ export const storyboardContent: Record<Language, StoryboardSectionContent> = {
     footer: {
       closingQuote: 'ನಮ್ಮ ನೂತನ ಮನೆ ಸದಾ ಪ್ರೀತಿ, ಶಾಂತಿ ಮತ್ತು ಸಮೃದ್ಧಿಯಿಂದ ಕೂಡಿರಲಿ.',
       brand: 'ಬಿಕಾಸ್ & ಭಾರ್ಗವಿ',
-      date: '16 ನವೆಂಬರ್ 2026',
+      date: '15 ನವೆಂಬರ್ 2026',
       subnote: 'ಗೃಹಪ್ರವೇಶ ಮಹೋತ್ಸವ • 2026',
     },
   },
